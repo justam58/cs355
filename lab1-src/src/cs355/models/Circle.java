@@ -6,9 +6,9 @@ import java.awt.Point;
 public class Circle extends Shape {
 	
 	private Point center;
-	private double radius;
+	private int radius;
 
-	public Circle(Color color, Point c, double r) {
+	public Circle(Color color, Point c, int r) {
 		super(color);
 		center = c;
 		radius = r;
@@ -22,11 +22,11 @@ public class Circle extends Shape {
 		this.center = center;
 	}
 
-	public double getRadius() {
+	public int getRadius() {
 		return radius;
 	}
 
-	public void setRadius(double radius) {
+	public void setRadius(int radius) {
 		this.radius = radius;
 	}
 

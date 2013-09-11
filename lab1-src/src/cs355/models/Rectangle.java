@@ -6,10 +6,10 @@ import java.awt.Point;
 public class Rectangle extends Shape{
 	
 	private Point upperLeftCorner;
-	private double height;
-	private double width;
+	private int height;
+	private int width;
 
-	public Rectangle(Color color, Point ulc, double h, double w) {
+	public Rectangle(Color color, Point ulc, int h, int w) {
 		super(color);
 		upperLeftCorner = ulc;
 		height = h;
@@ -24,19 +24,19 @@ public class Rectangle extends Shape{
 		this.upperLeftCorner = upperLeftCorner;
 	}
 
-	public double getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
-	public double getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
 

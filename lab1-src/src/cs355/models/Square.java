@@ -6,9 +6,9 @@ import java.awt.Point;
 public class Square extends Shape {
 
 	private Point upperLeftCorner;
-	private double size;
+	private int size;
 	
-	public Square(Color color, Point ulc, double s) {
+	public Square(Color color, Point ulc, int s) {
 		super(color);
 		upperLeftCorner = ulc;
 		size = s;
@@ -22,11 +22,11 @@ public class Square extends Shape {
 		this.upperLeftCorner = upperLeftCorner;
 	}
 
-	public double getSize() {
+	public int getSize() {
 		return size;
 	}
 
-	public void setSize(double size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 	

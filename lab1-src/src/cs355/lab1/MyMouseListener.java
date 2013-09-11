@@ -6,31 +6,30 @@ import java.awt.event.MouseListener;
 public class MyMouseListener implements MouseListener {
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
+		
+		System.out.printf("%d %d\n", e.getX(),e.getY());
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// no need
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// no need
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}

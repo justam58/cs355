@@ -3,13 +3,13 @@ package cs355.models;
 import java.awt.Color;
 import java.awt.Point;
 
-public class Ellipses extends Shape{
+public class Ellipse extends Shape{
 
 	private Point center;
-	private double height;
-	private double width;
+	private int height;
+	private int width;
 	
-	public Ellipses(Color color, Point c, double h, double w) {
+	public Ellipse(Color color, Point c, int h, int w) {
 		super(color);
 		center = c;
 		height = h;
@@ -24,19 +24,19 @@ public class Ellipses extends Shape{
 		this.center = center;
 	}
 
-	public double getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
-	public double getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
 

@@ -1,25 +1,28 @@
 package cs355.lab1;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
-import cs355.CS355Controller;
-import cs355.GUIFunctions;
+import cs355.*;
+import cs355.models.*;
 
 public class MyController implements CS355Controller{
 	
 	private Color currentColor;
+	private ShapeMode  currentShape;
+	private ShapeManager shapes = ShapeManager.getInstance();
+	
+	public enum ShapeMode { TRIANGLE, SQUARE, RECTANGLE, CIRCLE, ELLIPSE, LINE }
 
 	@Override
 	public void colorButtonHit(Color c) {
 		currentColor = c;
 		GUIFunctions.changeSelectedColor(c);
-		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void triangleButtonHit() {
-		// TODO Auto-generated method stub
-		
+		// TODO
 	}
 
 	@Override
