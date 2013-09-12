@@ -9,7 +9,11 @@ public class Ellipse extends Shape{
 	private int height;
 	private int width;
 	
-	public Ellipse() {}
+	public Ellipse(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
+		height = 0;
+		width = 0;
+	}
 	
 	public Ellipse(Color color, Point c, int h, int w) {
 		super(color);

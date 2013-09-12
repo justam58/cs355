@@ -8,8 +8,9 @@ public class Line extends Shape{
 	
 	private ArrayList<Point> points;
 	
-	public Line() {
+	public Line(Point a) {
 		points = new ArrayList<Point>();
+		points.add(a);
 	}
 
 	public Line(Color color, Point a, Point b) {

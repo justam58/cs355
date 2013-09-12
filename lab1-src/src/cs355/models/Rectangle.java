@@ -9,7 +9,11 @@ public class Rectangle extends Shape{
 	private int height;
 	private int width;
 	
-	public Rectangle() {}
+	public Rectangle(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
+		height = 0;
+		width = 0;
+	}	
 
 	public Rectangle(Color color, Point ulc, int h, int w) {
 		super(color);

@@ -23,7 +23,7 @@ public class ShapeManager {
 	private ShapeMode currentShapeMode = ShapeMode.TRIANGLE;
 	private int currentIndex = 0;
 	
-	// start frawing triangle or not
+	// start drawing triangle or not
 	private boolean triangleStarted = false;
     
 	// all of the shapes that have been drawn
@@ -44,11 +44,15 @@ public class ShapeManager {
 	public void add(Shape shape){
 		shape.setColor(currentColor);
 		shapes.add(currentIndex,shape);
+		if(currentShapeMode == ShapeMode.TRIANGLE){
+			setTriangleStarted(true);
+		}
 	}
 	
 	public void moveOn(){
-		System.out.println("done with one shape!");
+		//System.out.println("done with one shape!");
 		currentIndex++;
+		setTriangleStarted(false);
 		GUIFunctions.refresh();
 	}
 

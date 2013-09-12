@@ -8,8 +8,9 @@ public class Triangle extends Shape{
 	
 	private ArrayList<Point> points;
 	
-	public Triangle() {
+	public Triangle(Point a) {
 		points = new ArrayList<Point>();
+		points.add(a);
 	}
 	
 	public Triangle(Color color, Point a, Point b, Point c) {

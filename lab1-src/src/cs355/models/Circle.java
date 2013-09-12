@@ -8,7 +8,10 @@ public class Circle extends Shape {
 	private Point upperLeftCorner;
 	private int radius;
 	
-	public Circle() {}
+	public Circle(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
+		radius = 0;
+	}
 
 	public Circle(Color color, Point ulc, int r) {
 		super(color);

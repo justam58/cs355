@@ -8,7 +8,10 @@ public class Square extends Shape {
 	private Point upperLeftCorner;
 	private int size;
 	
-	public Square() {}
+	public Square(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
+		size = 0;
+	}
 	
 	public Square(Color color, Point ulc, int s) {
 		super(color);
