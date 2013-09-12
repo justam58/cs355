@@ -7,6 +7,10 @@ import java.util.ArrayList;
 public class Line extends Shape{
 	
 	private ArrayList<Point> points;
+	
+	public Line() {
+		points = new ArrayList<Point>();
+	}
 
 	public Line(Color color, Point a, Point b) {
 		super(color);
@@ -19,8 +23,11 @@ public class Line extends Shape{
 		return points;
 	}
 
-	public void setPoints(ArrayList<Point> points) {
-		this.points = points;
+	public void addPoint(Point point) {
+		points.add(point);
 	}
 
+	public void setEndPoint(Point point) {
+		points.add(1, point);;
+	}
 }

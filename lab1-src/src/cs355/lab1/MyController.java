@@ -13,36 +13,43 @@ public class MyController implements CS355Controller{
 	public void colorButtonHit(Color c) {
 		shapes.setCurrentColor(c);
 		GUIFunctions.changeSelectedColor(c);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void triangleButtonHit() {
-		shapes.setCurrentShape(ShapeMode.TRIANGLE);
+		shapes.setCurrentShapeMode(ShapeMode.TRIANGLE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void squareButtonHit() {
-		shapes.setCurrentShape(ShapeMode.SQUARE);
+		shapes.setCurrentShapeMode(ShapeMode.SQUARE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void rectangleButtonHit() {
-		shapes.setCurrentShape(ShapeMode.RECTANGLE);
+		shapes.setCurrentShapeMode(ShapeMode.RECTANGLE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void circleButtonHit() {
-		shapes.setCurrentShape(ShapeMode.CIRCLE);
+		shapes.setCurrentShapeMode(ShapeMode.CIRCLE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void ellipseButtonHit() {
-		shapes.setCurrentShape(ShapeMode.ELLIPSE);
+		shapes.setCurrentShapeMode(ShapeMode.ELLIPSE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void lineButtonHit() {
-		shapes.setCurrentShape(ShapeMode.LINE);
+		shapes.setCurrentShapeMode(ShapeMode.LINE);
+		shapes.setCurrentShape(null);
 	}
 
 	@Override

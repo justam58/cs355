@@ -5,23 +5,17 @@ import java.awt.Point;
 
 public class Ellipse extends Shape{
 
-	private Point center;
+	private Point upperLeftCorner;
 	private int height;
 	private int width;
 	
+	public Ellipse() {}
+	
 	public Ellipse(Color color, Point c, int h, int w) {
 		super(color);
-		center = c;
+		upperLeftCorner = c;
 		height = h;
 		width = w;
-	}
-
-	public Point getCenter() {
-		return center;
-	}
-
-	public void setCenter(Point center) {
-		this.center = center;
 	}
 
 	public int getHeight() {
@@ -38,6 +32,14 @@ public class Ellipse extends Shape{
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	public Point getUpperLeftCorner() {
+		return upperLeftCorner;
+	}
+
+	public void setUpperLeftCorner(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
 	}
 
 }

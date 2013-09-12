@@ -5,21 +5,15 @@ import java.awt.Point;
 
 public class Circle extends Shape {
 	
-	private Point center;
+	private Point upperLeftCorner;
 	private int radius;
+	
+	public Circle() {}
 
-	public Circle(Color color, Point c, int r) {
+	public Circle(Color color, Point ulc, int r) {
 		super(color);
-		center = c;
+		upperLeftCorner = ulc;
 		radius = r;
-	}
-
-	public Point getCenter() {
-		return center;
-	}
-
-	public void setCenter(Point center) {
-		this.center = center;
 	}
 
 	public int getRadius() {
@@ -28,6 +22,14 @@ public class Circle extends Shape {
 
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}
+
+	public Point getUpperLeftCorner() {
+		return upperLeftCorner;
+	}
+
+	public void setUpperLeftCorner(Point upperLeftCorner) {
+		this.upperLeftCorner = upperLeftCorner;
 	}
 
 }

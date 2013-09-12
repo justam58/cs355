@@ -8,6 +8,10 @@ public class Triangle extends Shape{
 	
 	private ArrayList<Point> points;
 	
+	public Triangle() {
+		points = new ArrayList<Point>();
+	}
+	
 	public Triangle(Color color, Point a, Point b, Point c) {
 		super(color);
 		points = new ArrayList<Point>();
@@ -20,8 +24,8 @@ public class Triangle extends Shape{
 		return points;
 	}
 
-	public void setPoints(ArrayList<Point> points) {
-		this.points = points;
+	public void addPoint(Point point) {
+		points.add(point);
 	}
 
 }

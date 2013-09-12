@@ -8,6 +8,8 @@ public class Rectangle extends Shape{
 	private Point upperLeftCorner;
 	private int height;
 	private int width;
+	
+	public Rectangle() {}
 
 	public Rectangle(Color color, Point ulc, int h, int w) {
 		super(color);

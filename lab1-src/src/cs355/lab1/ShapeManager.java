@@ -19,7 +19,9 @@ public class ShapeManager {
 	
 	// current shape and color
 	private Color currentColor;
-	private ShapeMode currentShape;
+	private ShapeMode currentShapeMode;
+	private Shape currentShape;
+	private int currentIndex = 0;
     
 	// all of the shapes that have been drawn
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -29,8 +31,18 @@ public class ShapeManager {
 		return shapes;
 	}
 	
-	public void add(Shape newShape){
-		shapes.add(newShape);
+	public void update(){
+		shapes.set(currentIndex,currentShape);
+	}
+		
+	public void add(){
+		shapes.add(currentIndex,currentShape);
+	}
+	
+	public void moveOn(){
+		//System.out.println("done with one shape!");
+		currentShape = null;
+		currentIndex++;
 	}
 
 	public Color getCurrentColor() {
@@ -41,12 +53,23 @@ public class ShapeManager {
 		this.currentColor = currentColor;
 	}
 
-	public ShapeMode getCurrentShape() {
+	public ShapeMode getCurrentShapeMode() {
+		return currentShapeMode;
+	}
+
+	public void setCurrentShapeMode(ShapeMode currentShapeMode) {
+		this.currentShapeMode = currentShapeMode;
+	}
+
+	public Shape getCurrentShape() {
 		return currentShape;
 	}
 
-	public void setCurrentShape(ShapeMode currentShape) {
+	public void setCurrentShape(Shape currentShape) {
 		this.currentShape = currentShape;
+		if(currentShape != null){
+			this.currentShape.setColor(currentColor);
+		}
 	}
 	
 }
