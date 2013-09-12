@@ -13,43 +13,36 @@ public class MyController implements CS355Controller{
 	public void colorButtonHit(Color c) {
 		shapes.setCurrentColor(c);
 		GUIFunctions.changeSelectedColor(c);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void triangleButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.TRIANGLE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void squareButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.SQUARE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void rectangleButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.RECTANGLE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void circleButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.CIRCLE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void ellipseButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.ELLIPSE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override
 	public void lineButtonHit() {
 		shapes.setCurrentShapeMode(ShapeMode.LINE);
-		shapes.setCurrentShape(null);
 	}
 
 	@Override

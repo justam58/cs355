@@ -3,6 +3,7 @@ package cs355.lab1;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import cs355.GUIFunctions;
 import cs355.models.Shape;
 
 public class ShapeManager {
@@ -19,9 +20,11 @@ public class ShapeManager {
 	
 	// current shape and color
 	private Color currentColor;
-	private ShapeMode currentShapeMode;
-	private Shape currentShape;
+	private ShapeMode currentShapeMode = ShapeMode.TRIANGLE;
 	private int currentIndex = 0;
+	
+	// start frawing triangle or not
+	private boolean triangleStarted = false;
     
 	// all of the shapes that have been drawn
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -31,18 +34,22 @@ public class ShapeManager {
 		return shapes;
 	}
 	
-	public void update(){
-		shapes.set(currentIndex,currentShape);
+	public void update(Shape shape){
+		shapes.set(currentIndex,shape);
+		if(currentShapeMode != ShapeMode.TRIANGLE){
+			GUIFunctions.refresh();
+		}
 	}
 		
-	public void add(){
-		shapes.add(currentIndex,currentShape);
+	public void add(Shape shape){
+		shape.setColor(currentColor);
+		shapes.add(currentIndex,shape);
 	}
 	
 	public void moveOn(){
-		//System.out.println("done with one shape!");
-		currentShape = null;
+		System.out.println("done with one shape!");
 		currentIndex++;
+		GUIFunctions.refresh();
 	}
 
 	public Color getCurrentColor() {
@@ -59,17 +66,19 @@ public class ShapeManager {
 
 	public void setCurrentShapeMode(ShapeMode currentShapeMode) {
 		this.currentShapeMode = currentShapeMode;
+		setTriangleStarted(false);
 	}
 
 	public Shape getCurrentShape() {
-		return currentShape;
+		return shapes.get(currentIndex);
 	}
 
-	public void setCurrentShape(Shape currentShape) {
-		this.currentShape = currentShape;
-		if(currentShape != null){
-			this.currentShape.setColor(currentColor);
-		}
+	public boolean isTriangleStarted() {
+		return triangleStarted;
+	}
+
+	public void setTriangleStarted(boolean triangleStarted) {
+		this.triangleStarted = triangleStarted;
 	}
 	
 }
