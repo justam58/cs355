@@ -50,7 +50,7 @@ public class ShapeManager {
 	}
 	
 	public void moveOn(){
-		//System.out.println("done with one shape!");
+		System.out.println("done with one shape!");
 		currentIndex++;
 		setTriangleStarted(false);
 		GUIFunctions.refresh();
@@ -71,6 +71,12 @@ public class ShapeManager {
 	public void setCurrentShapeMode(ShapeMode currentShapeMode) {
 		this.currentShapeMode = currentShapeMode;
 		setTriangleStarted(false);
+		try{
+			shapes.remove(currentIndex);
+		}
+		catch(IndexOutOfBoundsException e){
+			System.out.println("clean current but it's alreay null");
+		}
 	}
 
 	public Shape getCurrentShape() {
