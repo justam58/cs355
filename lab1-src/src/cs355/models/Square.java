@@ -1,6 +1,5 @@
 package cs355.models;
 
-import java.awt.Color;
 import java.awt.Point;
 
 public class Square extends Shape {
@@ -8,31 +7,23 @@ public class Square extends Shape {
 	private Point upperLeftCorner;
 	private int size;
 	
-	public Square(Point upperLeftCorner) {
-		this.upperLeftCorner = upperLeftCorner;
-		size = 0;
+	public Square(Point start) {
+		upperLeftCorner = start;
+		setEndPoint(start);
 	}
 	
-	public Square(Color color, Point ulc, int s) {
-		super(color);
-		upperLeftCorner = ulc;
-		size = s;
+	public void setEndPoint(Point end){
+		Point start = upperLeftCorner;
+		size = Math.min(Math.abs(start.x-end.x), Math.abs(start.y-end.y));
+		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
 	}
-
+	
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
 
-	public void setUpperLeftCorner(Point upperLeftCorner) {
-		this.upperLeftCorner = upperLeftCorner;
-	}
-
 	public int getSize() {
 		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
 	}
 	
 }

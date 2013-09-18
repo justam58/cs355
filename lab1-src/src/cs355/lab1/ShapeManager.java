@@ -19,7 +19,7 @@ public class ShapeManager {
 	public enum ShapeMode { TRIANGLE, SQUARE, RECTANGLE, CIRCLE, ELLIPSE, LINE }
 	
 	// current shape and color
-	private Color currentColor;
+	private Color currentColor ;
 	private ShapeMode currentShapeMode = ShapeMode.TRIANGLE;
 	private int currentIndex = 0;
 	

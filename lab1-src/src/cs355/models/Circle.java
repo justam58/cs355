@@ -1,38 +1,29 @@
 package cs355.models;
 
-import java.awt.Color;
 import java.awt.Point;
 
 public class Circle extends Shape {
 	
 	private Point upperLeftCorner;
 	private int radius;
-	
-	public Circle(Point upperLeftCorner) {
-		this.upperLeftCorner = upperLeftCorner;
-		radius = 0;
+
+	public Circle(Point start) {
+		upperLeftCorner = start;
+		setEndPoint(start);
 	}
 
-	public Circle(Color color, Point ulc, int r) {
-		super(color);
-		upperLeftCorner = ulc;
-		radius = r;
-	}
-
-	public int getRadius() {
-		return radius;
-	}
-
-	public void setRadius(int radius) {
-		this.radius = radius;
+	public void setEndPoint(Point end){
+		Point start = upperLeftCorner;
+		radius = Math.min(Math.abs(start.x-end.x), Math.abs(start.y-end.y));
+		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
 	}
 
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
 
-	public void setUpperLeftCorner(Point upperLeftCorner) {
-		this.upperLeftCorner = upperLeftCorner;
+	public int getRadius() {
+		return radius;
 	}
 
 }

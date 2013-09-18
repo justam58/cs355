@@ -38,31 +38,33 @@ public class MyViewRefresher implements ViewRefresher{
 	private void drawLine(Graphics2D g2d, Line line){
 		//System.out.println("draw line!");
 		ArrayList<Point> points = line.getPoints();
-		g2d.drawLine((int)points.get(0).getX(), (int)points.get(0).getY(), (int)points.get(1).getX(), (int)points.get(1).getY());
+		Point a = points.get(0);
+		Point b = points.get(1);
+		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
 	}
 	
 	private void drawSquare(Graphics2D g2d, Square square){
 		//System.out.println("draw square!");
-		Point upperLeftCorner = square.getUpperLeftCorner();
-		g2d.fillRect((int)upperLeftCorner.getX(), (int)upperLeftCorner.getY(), square.getSize(), square.getSize());
+		Point ulc = square.getUpperLeftCorner();
+		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), square.getSize(), square.getSize());
 	}
 	
 	private void drawRectangle(Graphics2D g2d, Rectangle rectangle){
 		//System.out.println("draw rectangle!");
-		Point upperLeftCorner = rectangle.getUpperLeftCorner();
-		g2d.fillRect((int)upperLeftCorner.getX(), (int)upperLeftCorner.getY(), rectangle.getWidth(), rectangle.getHeight());
+		Point ulc = rectangle.getUpperLeftCorner();
+		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), rectangle.getWidth(), rectangle.getHeight());
 	}
 	
 	private void drawCircle(Graphics2D g2d, Circle circle){
 		//System.out.println("draw circle!");
-		Point upperLeftCorner = circle.getUpperLeftCorner();
-		g2d.fillOval((int)upperLeftCorner.getX(), (int)upperLeftCorner.getY(), circle.getRadius(), circle.getRadius());
+		Point ulc = circle.getUpperLeftCorner();
+		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), circle.getRadius(), circle.getRadius());
 	}
 	
 	private void drawEllipse(Graphics2D g2d, Ellipse ellipse){
 		//System.out.println("draw ellipse!");
-		Point upperLeftCorner = ellipse.getUpperLeftCorner();
-		g2d.fillOval((int)upperLeftCorner.getX(), (int)upperLeftCorner.getY(), ellipse.getWidth(), ellipse.getHeight());
+		Point ulc = ellipse.getUpperLeftCorner();
+		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), ellipse.getWidth(), ellipse.getHeight());
 	}
 	
 	private void drawTrianagle(Graphics2D g2d, Triangle triangle){

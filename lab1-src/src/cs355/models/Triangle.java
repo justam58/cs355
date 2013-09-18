@@ -1,6 +1,5 @@
 package cs355.models;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -12,21 +11,21 @@ public class Triangle extends Shape{
 		points = new ArrayList<Point>();
 		points.add(a);
 	}
-	
-	public Triangle(Color color, Point a, Point b, Point c) {
-		super(color);
-		points = new ArrayList<Point>();
-		points.add(a);
-		points.add(b);
-		points.add(c);
-	}
 
-	public ArrayList<Point> getPoints() {
-		return points;
+	public int getPointsSize() {
+		return points.size();
 	}
 
 	public void addPoint(Point point) {
+		if(getPointsSize() == 3){
+			System.out.println("ERROR: Triangle can only has 3 points.");
+			return;
+		}
 		points.add(point);
 	}
-
+	
+	public ArrayList<Point> getPoints() {
+		return points;
+	}
+	
 }

@@ -1,6 +1,5 @@
 package cs355.models;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -8,27 +7,18 @@ public class Line extends Shape{
 	
 	private ArrayList<Point> points;
 	
-	public Line(Point a) {
+	public Line(Point start) {
 		points = new ArrayList<Point>();
-		points.add(a);
+		points.add(start);
+		points.add(start);
 	}
 
-	public Line(Color color, Point a, Point b) {
-		super(color);
-		points = new ArrayList<Point>();
-		points.add(a);
-		points.add(b);
+	public void setEndPoint(Point end) {
+		points.add(1, end);;
 	}
 
 	public ArrayList<Point> getPoints() {
 		return points;
 	}
-
-	public void addPoint(Point point) {
-		points.add(point);
-	}
-
-	public void setEndPoint(Point point) {
-		points.add(1, point);;
-	}
+	
 }
