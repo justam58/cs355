@@ -25,21 +25,18 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		if (shapes.getCurrentShapeMode() == ShapeMode.TRIANGLE){
 			
 			if(!shapes.isTriangleStarted()){
-				System.out.println("start drawing triangle");
 				Triangle triangle = new Triangle(new Point(e.getX(),e.getY()));
 				shapes.add(triangle);
 			}
 			else{
 				Triangle triangle = (Triangle) shapes.getCurrentShape();
 				if(triangle.getPoints().size() == 1){
-					System.out.println("continue drawing triangle");
 					triangle.addPoint(new Point(e.getX(),e.getY()));
 					shapes.update(triangle);
 				}
 				else if(triangle.getPoints().size() == 2){
 					triangle.addPoint(new Point(e.getX(),e.getY()));
 					shapes.moveOn();
-					System.out.println("done drawing triangle");
 				}
 			}
 		}
@@ -63,33 +60,30 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		if(shapes.getCurrentShapeMode() != ShapeMode.TRIANGLE){
 			dragging = true;
 			
+			Point start = new Point(e.getX(),e.getY());
+			
 			if (shapes.getCurrentShapeMode() == ShapeMode.LINE){
-				System.out.println("start drawing line");
-				Line shape = new Line(new Point(e.getX(),e.getY()));
+				Line shape = new Line(start);
 				shapes.add(shape);
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.RECTANGLE){
-				System.out.println("start drawing rectangle");
-				Rectangle shape = new Rectangle(new Point(e.getX(),e.getY()));
+				Rectangle shape = new Rectangle(start);
 				shapes.add(shape);
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.SQUARE){
-				System.out.println("start drawing square");
-				Square shape = new Square(new Point(e.getX(),e.getY()));
+				Square shape = new Square(start);
 				shapes.add(shape);
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.ELLIPSE){
-				System.out.println("start drawing ellipse");
-				Ellipse shape = new Ellipse(new Point(e.getX(),e.getY()));
+				Ellipse shape = new Ellipse(start);
 				shapes.add(shape);
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.CIRCLE){
-				System.out.println("start drawing circle");
-				Circle shape = new Circle(new Point(e.getX(),e.getY()));
+				Circle shape = new Circle(start);
 				shapes.add(shape);
 			}
 		}
@@ -116,35 +110,30 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 				Line shape = (Line) shapes.getCurrentShape();
 				shape.setEndPoint(end);
 				shapes.update(shape);
-				System.out.println("done drawing line");
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.RECTANGLE){
 				Rectangle shape = (Rectangle) shapes.getCurrentShape();
 				shape.setEndPoint(end);
 				shapes.update(shape);
-				System.out.println("done drawing rectangle");
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.SQUARE){
 				Square shape = (Square) shapes.getCurrentShape();
 				shape.setEndPoint(end);
 				shapes.update(shape);
-				System.out.println("done drawing square");
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.ELLIPSE){
 				Ellipse shape = (Ellipse) shapes.getCurrentShape();
 				shape.setEndPoint(end);
 				shapes.update(shape);
-				System.out.println("done drawing ellipse");
 			}
 			
 			if (shapes.getCurrentShapeMode() == ShapeMode.CIRCLE){
 				Circle shape = (Circle) shapes.getCurrentShape();
 				shape.setEndPoint(end);
 				shapes.update(shape);
-				System.out.println("done drawing circle");
 			}
 		}
 	}

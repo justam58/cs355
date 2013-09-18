@@ -71,6 +71,9 @@ public class MyViewRefresher implements ViewRefresher{
 		//System.out.println("draw triangle!");	
 		ArrayList<Point> points = triangle.getPoints();		
 		Polygon polygon = new Polygon();
+		if(points.size() != 3){
+			return;
+		}
 		for(int i = 0; i < 3; i++){
 			polygon.addPoint((int)points.get(i).getX(),(int)points.get(i).getY());
 		}

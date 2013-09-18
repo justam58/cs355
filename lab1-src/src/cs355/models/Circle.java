@@ -5,17 +5,30 @@ import java.awt.Point;
 public class Circle extends Shape {
 	
 	private Point upperLeftCorner;
+	private Point start;
 	private int radius;
 
 	public Circle(Point start) {
 		upperLeftCorner = start;
-		setEndPoint(start);
+		this.start = start;
 	}
 
 	public void setEndPoint(Point end){
-		Point start = upperLeftCorner;
-		radius = Math.min(Math.abs(start.x-end.x), Math.abs(start.y-end.y));
-		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
+		int delta_x = end.x - start.x;
+		int delta_y = end.y - start.y;
+		radius = Math.min(Math.abs(delta_x), Math.abs(delta_y));
+		if(delta_x <= 0 && delta_y <= 0){
+			upperLeftCorner = new Point(start.x - radius, start.y - radius); 
+		}
+		else if(delta_x <= 0 && delta_y > 0){
+			upperLeftCorner = new Point(start.x - radius, start.y); 
+		}
+		else if(delta_x > 0 && delta_y <= 0){
+			upperLeftCorner = new Point(start.x, start.y - radius); 
+		}
+		else{
+			upperLeftCorner = new Point(start.x, start.y); 
+		}
 	}
 
 	public Point getUpperLeftCorner() {

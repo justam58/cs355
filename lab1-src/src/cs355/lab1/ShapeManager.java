@@ -36,9 +36,7 @@ public class ShapeManager {
 	
 	public void update(Shape shape){
 		shapes.set(currentIndex,shape);
-		if(currentShapeMode != ShapeMode.TRIANGLE){
-			GUIFunctions.refresh();
-		}
+		GUIFunctions.refresh();
 	}
 		
 	public void add(Shape shape){
@@ -50,7 +48,6 @@ public class ShapeManager {
 	}
 	
 	public void moveOn(){
-		System.out.println("done with one shape!");
 		currentIndex++;
 		setTriangleStarted(false);
 		GUIFunctions.refresh();
@@ -62,6 +59,14 @@ public class ShapeManager {
 
 	public void setCurrentColor(Color currentColor) {
 		this.currentColor = currentColor;
+		Shape shape;
+		try{
+			shape = getCurrentShape();
+		}
+		catch(IndexOutOfBoundsException e){
+			return;
+		}
+		shape.setColor(currentColor);
 	}
 
 	public ShapeMode getCurrentShapeMode() {
@@ -71,12 +76,6 @@ public class ShapeManager {
 	public void setCurrentShapeMode(ShapeMode currentShapeMode) {
 		this.currentShapeMode = currentShapeMode;
 		setTriangleStarted(false);
-		try{
-			shapes.remove(currentIndex);
-		}
-		catch(IndexOutOfBoundsException e){
-			System.out.println("clean current but it's alreay null");
-		}
 	}
 
 	public Shape getCurrentShape() {
