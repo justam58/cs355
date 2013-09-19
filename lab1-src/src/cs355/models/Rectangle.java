@@ -1,7 +1,6 @@
 package cs355.models;
 
 import java.awt.Point;
-import java.awt.geom.Rectangle2D;
 
 public class Rectangle extends Shape{
 	
@@ -36,8 +35,13 @@ public class Rectangle extends Shape{
 
 	@Override
 	public boolean contains(Point p) {
-		Rectangle2D.Double rectangle = new Rectangle2D.Double(upperLeftCorner.x,upperLeftCorner.y,width,height);
-		return rectangle.contains(p);	
+		if(p.y < upperLeftCorner.y ||
+		   p.x < upperLeftCorner.x ||
+		   p.y > upperLeftCorner.y + height ||
+		   p.x > upperLeftCorner.x + width ){
+				return false;
+		}
+		return true;
 	}
 
 	@Override

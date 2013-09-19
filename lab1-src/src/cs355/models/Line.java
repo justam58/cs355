@@ -1,14 +1,12 @@
 package cs355.models;
 
 import java.awt.Point;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Line extends Shape{
 	
 	private ArrayList<Point> points;
-	private static final int HIT_BOX_SIZE = 2;
+	private static final int HIT_BOX_SIZE = 3;
 	
 	public Line(Point start) {
 		points = new ArrayList<Point>();
@@ -26,17 +24,26 @@ public class Line extends Shape{
 	
 	@Override
 	public boolean contains(Point p) {
-		Line2D.Double line = new Line2D.Double(points.get(0),points.get(1));
-		int boxX = p.x - HIT_BOX_SIZE / 2;
-		int boxY = p.y - HIT_BOX_SIZE / 2;
-		return line.intersects(boxX, boxY, HIT_BOX_SIZE, HIT_BOX_SIZE);
+		Point p1 = points.get(0);
+		Point p2 = points.get(1);
+		double dist;
+		if(p1.x == p2.x){
+			dist = Math.abs(p.x - p1.x);
+		}
+		else{
+			dist = Math.abs((p2.x - p1.x) * (p1.y - p.y) - (p1.x - p.x) * (p2.y - p1.y)) / 
+				   Math.sqrt((Math.pow((p2.x - p1.x), 2) + (Math.pow((p2.y - p1.y), 2))));
+		}
+
+		System.out.println(dist);
+		return dist <= HIT_BOX_SIZE;
 	}
 
 	@Override
 	public Point getCenter() {
-		Line2D.Double line = new Line2D.Double(points.get(0),points.get(1));
-		Rectangle2D boundRec = line.getBounds2D();
-		return new Point((int)boundRec.getCenterX(), (int)boundRec.getCenterY());
+		int xTotal = points.get(0).x + points.get(1).x;
+		int yTotal = points.get(0).y + points.get(1).y;
+		return new Point(xTotal/2, yTotal/2);
 	}
 	
 }

@@ -49,9 +49,11 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 			for(int i = 0; i < shapes.size(); i++){
 				boolean contains = shapes.get(i).contains(p);
 				if(contains){
-					System.out.println("selected something");
 					shapeManager.setSelectedIndex(i);
 					break;
+				}
+				else{
+					shapeManager.setSelectedIndex(-1);
 				}
 			}
 		}

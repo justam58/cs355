@@ -1,7 +1,6 @@
 package cs355.models;
 
 import java.awt.Point;
-import java.awt.geom.Ellipse2D;
 
 public class Circle extends Shape {
 	
@@ -42,8 +41,7 @@ public class Circle extends Shape {
 
 	@Override
 	public boolean contains(Point p) {
-		Ellipse2D.Double circle = new Ellipse2D.Double(upperLeftCorner.x,upperLeftCorner.y,radius,radius);
-		return circle.contains(p);	
+		return (Math.pow(p.x - getCenter().x, 2) + Math.pow(p.y - getCenter().y, 2) <= Math.pow(radius/2, 2));
 	}
 
 	@Override
