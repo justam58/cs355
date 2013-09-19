@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.Ellipse2D;
 
 public class Ellipse extends Shape{
 
@@ -31,6 +32,17 @@ public class Ellipse extends Shape{
 
 	public int getWidth() {
 		return width;
+	}
+
+	@Override
+	public boolean contains(Point p) {
+		Ellipse2D.Double ellispe = new Ellipse2D.Double(upperLeftCorner.x,upperLeftCorner.y,width,height);
+		return ellispe.contains(p);	
+	}
+
+	@Override
+	public Point getCenter() {
+		return new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
 	}
 
 }

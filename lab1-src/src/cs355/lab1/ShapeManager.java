@@ -16,12 +16,13 @@ public class ShapeManager {
     }
     
 	// different shapes in enum
-	public enum ShapeMode { TRIANGLE, SQUARE, RECTANGLE, CIRCLE, ELLIPSE, LINE }
+	public enum Mode { TRIANGLE, SQUARE, RECTANGLE, CIRCLE, ELLIPSE, LINE, SELECT }
 	
 	// current shape and color
-	private Color currentColor ;
-	private ShapeMode currentShapeMode = ShapeMode.TRIANGLE;
-	private int currentIndex = 0;
+	private Color currentColor = Color.WHITE;
+	private Mode currentMode = Mode.TRIANGLE;
+	private int totalIndex = 0;
+	private int selectedIndex = -1;
 	
 	// start drawing triangle or not
 	private boolean triangleStarted = false;
@@ -35,20 +36,20 @@ public class ShapeManager {
 	}
 	
 	public void update(Shape shape){
-		shapes.set(currentIndex,shape);
+		shapes.set(totalIndex,shape);
 		GUIFunctions.refresh();
 	}
 		
 	public void add(Shape shape){
 		shape.setColor(currentColor);
-		shapes.add(currentIndex,shape);
-		if(currentShapeMode == ShapeMode.TRIANGLE){
+		shapes.add(totalIndex,shape);
+		if(currentMode == Mode.TRIANGLE){
 			setTriangleStarted(true);
 		}
 	}
 	
 	public void moveOn(){
-		currentIndex++;
+		totalIndex++;
 		setTriangleStarted(false);
 		GUIFunctions.refresh();
 	}
@@ -69,17 +70,20 @@ public class ShapeManager {
 		shape.setColor(currentColor);
 	}
 
-	public ShapeMode getCurrentShapeMode() {
-		return currentShapeMode;
+	public Mode getCurrentMode() {
+		return currentMode;
 	}
 
-	public void setCurrentShapeMode(ShapeMode currentShapeMode) {
-		this.currentShapeMode = currentShapeMode;
+	public void setCurrentMode(Mode currentMode) {
+		this.currentMode = currentMode;
 		setTriangleStarted(false);
+		if(currentMode != Mode.SELECT){
+			setSelectedIndex(-1);
+		}
 	}
 
 	public Shape getCurrentShape() {
-		return shapes.get(currentIndex);
+		return shapes.get(totalIndex);
 	}
 
 	public boolean isTriangleStarted() {
@@ -88,6 +92,15 @@ public class ShapeManager {
 
 	public void setTriangleStarted(boolean triangleStarted) {
 		this.triangleStarted = triangleStarted;
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+		GUIFunctions.refresh();
 	}
 	
 }

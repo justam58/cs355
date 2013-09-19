@@ -1,19 +1,20 @@
 package cs355.models;
 
 import java.awt.Point;
-import java.util.ArrayList;
+import java.awt.Polygon;
+import java.awt.geom.Rectangle2D;
 
 public class Triangle extends Shape{
 	
-	private ArrayList<Point> points;
+	Polygon polygon;
 	
 	public Triangle(Point a) {
-		points = new ArrayList<Point>();
-		points.add(a);
+		polygon = new Polygon();
+		polygon.addPoint(a.x,a.y);
 	}
 
 	public int getPointsSize() {
-		return points.size();
+		return polygon.npoints;
 	}
 
 	public void addPoint(Point point) {
@@ -21,11 +22,22 @@ public class Triangle extends Shape{
 			System.out.println("ERROR: Triangle can only has 3 points.");
 			return;
 		}
-		points.add(point);
+		polygon.addPoint(point.x,point.y);
 	}
-	
-	public ArrayList<Point> getPoints() {
-		return points;
+
+	public Polygon getPolygon() {
+		return polygon;
+	}
+
+	@Override
+	public boolean contains(Point p) {
+		return polygon.contains(p);
+	}
+
+	@Override
+	public Point getCenter() {
+		Rectangle2D boundRec = polygon.getBounds2D();
+		return new Point((int)boundRec.getCenterX(), (int)boundRec.getCenterY());
 	}
 	
 }

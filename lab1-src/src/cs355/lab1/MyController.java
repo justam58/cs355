@@ -3,7 +3,7 @@ package cs355.lab1;
 import java.awt.Color;
 
 import cs355.*;
-import cs355.lab1.ShapeManager.ShapeMode;
+import cs355.lab1.ShapeManager.Mode;
 
 public class MyController implements CS355Controller{
 	
@@ -17,38 +17,37 @@ public class MyController implements CS355Controller{
 
 	@Override
 	public void triangleButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.TRIANGLE);
+		shapes.setCurrentMode(Mode.TRIANGLE);
 	}
 
 	@Override
 	public void squareButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.SQUARE);
+		shapes.setCurrentMode(Mode.SQUARE);
 	}
 
 	@Override
 	public void rectangleButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.RECTANGLE);
+		shapes.setCurrentMode(Mode.RECTANGLE);
 	}
 
 	@Override
 	public void circleButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.CIRCLE);
+		shapes.setCurrentMode(Mode.CIRCLE);
 	}
 
 	@Override
 	public void ellipseButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.ELLIPSE);
+		shapes.setCurrentMode(Mode.ELLIPSE);
 	}
 
 	@Override
 	public void lineButtonHit() {
-		shapes.setCurrentShapeMode(ShapeMode.LINE);
+		shapes.setCurrentMode(Mode.LINE);
 	}
 
 	@Override
 	public void selectButtonHit() {
-		// TODO Auto-generated method stub
-		
+		shapes.setCurrentMode(Mode.SELECT);
 	}
 
 	@Override

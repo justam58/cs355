@@ -4,13 +4,14 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
-import cs355.lab1.ShapeManager.ShapeMode;
+import cs355.lab1.ShapeManager.Mode;
 import cs355.models.*;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener{
 	
-	private ShapeManager shapes = ShapeManager.getInstance(); 
+	private ShapeManager shapeManager = ShapeManager.getInstance(); 
 	private boolean dragging;
 	
 	private void initDrag() {
@@ -22,21 +23,35 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		
 		//System.out.printf("click: %d %d\n", e.getX(),e.getY());
 		
-		if (shapes.getCurrentShapeMode() == ShapeMode.TRIANGLE){
+		Point p = new Point(e.getX(),e.getY());
+		
+		if (shapeManager.getCurrentMode() == Mode.TRIANGLE){
 			
-			if(!shapes.isTriangleStarted()){
-				Triangle triangle = new Triangle(new Point(e.getX(),e.getY()));
-				shapes.add(triangle);
+			if(!shapeManager.isTriangleStarted()){
+				Triangle triangle = new Triangle(p);
+				shapeManager.add(triangle);
 			}
 			else{
-				Triangle triangle = (Triangle) shapes.getCurrentShape();
-				if(triangle.getPoints().size() == 1){
-					triangle.addPoint(new Point(e.getX(),e.getY()));
-					shapes.update(triangle);
+				Triangle triangle = (Triangle) shapeManager.getCurrentShape();
+				if(triangle.getPointsSize() == 1){
+					triangle.addPoint(p);
+					shapeManager.update(triangle);
 				}
-				else if(triangle.getPoints().size() == 2){
-					triangle.addPoint(new Point(e.getX(),e.getY()));
-					shapes.moveOn();
+				else if(triangle.getPointsSize() == 2){
+					triangle.addPoint(p);
+					shapeManager.moveOn();
+				}
+			}
+		}
+		
+		if(shapeManager.getCurrentMode() == Mode.SELECT){
+			ArrayList<Shape> shapes = shapeManager.getShapes();
+			for(int i = 0; i < shapes.size(); i++){
+				boolean contains = shapes.get(i).contains(p);
+				if(contains){
+					System.out.println("selected something");
+					shapeManager.setSelectedIndex(i);
+					break;
 				}
 			}
 		}
@@ -57,34 +72,35 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		
 		//System.out.printf("press: %d %d\n", e.getX(),e.getY());
 		
-		if(shapes.getCurrentShapeMode() != ShapeMode.TRIANGLE){
+		if(shapeManager.getCurrentMode() != Mode.TRIANGLE &&
+		   shapeManager.getCurrentMode() != Mode.SELECT){
 			dragging = true;
 			
 			Point start = new Point(e.getX(),e.getY());
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.LINE){
+			if (shapeManager.getCurrentMode() == Mode.LINE){
 				Line shape = new Line(start);
-				shapes.add(shape);
+				shapeManager.add(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.RECTANGLE){
+			if (shapeManager.getCurrentMode() == Mode.RECTANGLE){
 				Rectangle shape = new Rectangle(start);
-				shapes.add(shape);
+				shapeManager.add(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.SQUARE){
+			if (shapeManager.getCurrentMode() == Mode.SQUARE){
 				Square shape = new Square(start);
-				shapes.add(shape);
+				shapeManager.add(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.ELLIPSE){
+			if (shapeManager.getCurrentMode() == Mode.ELLIPSE){
 				Ellipse shape = new Ellipse(start);
-				shapes.add(shape);
+				shapeManager.add(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.CIRCLE){
+			if (shapeManager.getCurrentMode() == Mode.CIRCLE){
 				Circle shape = new Circle(start);
-				shapes.add(shape);
+				shapeManager.add(shape);
 			}
 		}
 	}
@@ -92,8 +108,8 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		if (dragging && (shapes.getCurrentShapeMode() != ShapeMode.TRIANGLE)){	
-			shapes.moveOn();
+		if (dragging && (shapeManager.getCurrentMode() != Mode.TRIANGLE)){	
+			shapeManager.moveOn();
 			initDrag();
 		}
 	}
@@ -106,34 +122,34 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 
 			Point end = new Point(e.getX(),e.getY());
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.LINE){
-				Line shape = (Line) shapes.getCurrentShape();
+			if (shapeManager.getCurrentMode() == Mode.LINE){
+				Line shape = (Line) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapes.update(shape);
+				shapeManager.update(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.RECTANGLE){
-				Rectangle shape = (Rectangle) shapes.getCurrentShape();
+			if (shapeManager.getCurrentMode() == Mode.RECTANGLE){
+				Rectangle shape = (Rectangle) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapes.update(shape);
+				shapeManager.update(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.SQUARE){
-				Square shape = (Square) shapes.getCurrentShape();
+			if (shapeManager.getCurrentMode() == Mode.SQUARE){
+				Square shape = (Square) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapes.update(shape);
+				shapeManager.update(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.ELLIPSE){
-				Ellipse shape = (Ellipse) shapes.getCurrentShape();
+			if (shapeManager.getCurrentMode() == Mode.ELLIPSE){
+				Ellipse shape = (Ellipse) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapes.update(shape);
+				shapeManager.update(shape);
 			}
 			
-			if (shapes.getCurrentShapeMode() == ShapeMode.CIRCLE){
-				Circle shape = (Circle) shapes.getCurrentShape();
+			if (shapeManager.getCurrentMode() == Mode.CIRCLE){
+				Circle shape = (Circle) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapes.update(shape);
+				shapeManager.update(shape);
 			}
 		}
 	}

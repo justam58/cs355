@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.Rectangle2D;
 
 public class Square extends Shape {
 
@@ -38,6 +39,17 @@ public class Square extends Shape {
 
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public boolean contains(Point p) {
+		Rectangle2D.Double square = new Rectangle2D.Double(upperLeftCorner.x,upperLeftCorner.y,size,size);
+		return square.contains(p);	
+	}
+
+	@Override
+	public Point getCenter() {
+		return new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
 	}
 	
 }
