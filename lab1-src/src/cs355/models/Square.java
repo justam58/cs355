@@ -53,7 +53,7 @@ public class Square extends Shape {
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
+		return new Point(upperLeftCorner.x + size/2.0, upperLeftCorner.y + size/2.0);
 	}
 	
 }

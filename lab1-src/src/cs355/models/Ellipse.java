@@ -40,7 +40,7 @@ public class Ellipse extends Shape{
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
+		return new Point(upperLeftCorner.x + width/2.0, upperLeftCorner.y + height/2.0);
 	}
 
 }

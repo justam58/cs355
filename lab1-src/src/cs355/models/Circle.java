@@ -41,12 +41,12 @@ public class Circle extends Shape {
 
 	@Override
 	public boolean contains(Point p) {
-		return (Math.pow(p.x - getCenter().x, 2) + Math.pow(p.y - getCenter().y, 2) <= Math.pow(radius/2, 2));
+		return (Math.pow(p.x - getCenter().x, 2) + Math.pow(p.y - getCenter().y, 2) <= Math.pow(radius/2.0, 2));
 	}
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + radius/2, upperLeftCorner.y + radius/2);
+		return new Point(upperLeftCorner.x + radius/2.0, upperLeftCorner.y + radius/2.0);
 	}
 
 }

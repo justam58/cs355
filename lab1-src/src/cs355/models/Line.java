@@ -43,7 +43,7 @@ public class Line extends Shape{
 	public Point getCenter() {
 		int xTotal = points.get(0).x + points.get(1).x;
 		int yTotal = points.get(0).y + points.get(1).y;
-		return new Point(xTotal/2, yTotal/2);
+		return new Point(xTotal/2.0, yTotal/2.0);
 	}
 	
 }
