@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Circle extends Shape {
 	
@@ -46,7 +47,17 @@ public class Circle extends Shape {
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + radius/2.0, upperLeftCorner.y + radius/2.0);
+		return new Point(upperLeftCorner.x + radius/2, upperLeftCorner.y + radius/2);
+	}
+	
+	@Override
+	public ArrayList<Point> getResizePoints(){
+		ArrayList<Point> bPoints = new ArrayList<Point>();
+		bPoints.add(upperLeftCorner);
+		bPoints.add(new Point(upperLeftCorner.x + radius, upperLeftCorner.y));
+		bPoints.add(new Point(upperLeftCorner.x + radius, upperLeftCorner.y + radius));
+		bPoints.add(new Point(upperLeftCorner.x, upperLeftCorner.y + radius));
+		return bPoints;
 	}
 
 }

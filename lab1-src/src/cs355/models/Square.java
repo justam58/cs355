@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Square extends Shape {
 
@@ -53,7 +54,17 @@ public class Square extends Shape {
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + size/2.0, upperLeftCorner.y + size/2.0);
+		return new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
+	}
+	
+	@Override
+	public ArrayList<Point> getResizePoints(){
+		ArrayList<Point> bPoints = new ArrayList<Point>();
+		bPoints.add(upperLeftCorner);
+		bPoints.add(new Point(upperLeftCorner.x + size, upperLeftCorner.y));
+		bPoints.add(new Point(upperLeftCorner.x + size, upperLeftCorner.y + size));
+		bPoints.add(new Point(upperLeftCorner.x, upperLeftCorner.y + size));
+		return bPoints;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Rectangle extends Shape{
 	
@@ -46,7 +47,16 @@ public class Rectangle extends Shape{
 
 	@Override
 	public Point getCenter() {
-		return new Point(upperLeftCorner.x + width/2.0, upperLeftCorner.y + height/2.0);
+		return new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
 	}
-
+	
+	@Override
+	public ArrayList<Point> getResizePoints(){
+		ArrayList<Point> bPoints = new ArrayList<Point>();
+		bPoints.add(upperLeftCorner);
+		bPoints.add(new Point(upperLeftCorner.x + width, upperLeftCorner.y));
+		bPoints.add(new Point(upperLeftCorner.x + width, upperLeftCorner.y + height));
+		bPoints.add(new Point(upperLeftCorner.x, upperLeftCorner.y + height));
+		return bPoints;
+	}
 }

@@ -15,7 +15,7 @@ public class Line extends Shape{
 	}
 
 	public void setEndPoint(Point end) {
-		points.add(1, end);;
+		points.set(1, end);;
 	}
 
 	public ArrayList<Point> getPoints() {
@@ -34,8 +34,6 @@ public class Line extends Shape{
 			dist = Math.abs((p2.x - p1.x) * (p1.y - p.y) - (p1.x - p.x) * (p2.y - p1.y)) / 
 				   Math.sqrt((Math.pow((p2.x - p1.x), 2) + (Math.pow((p2.y - p1.y), 2))));
 		}
-
-		System.out.println(dist);
 		return dist <= HIT_BOX_SIZE;
 	}
 
@@ -43,7 +41,12 @@ public class Line extends Shape{
 	public Point getCenter() {
 		int xTotal = points.get(0).x + points.get(1).x;
 		int yTotal = points.get(0).y + points.get(1).y;
-		return new Point(xTotal/2.0, yTotal/2.0);
+		return new Point(xTotal/2, yTotal/2);
+	}
+
+	@Override
+	public ArrayList<Point> getResizePoints() {
+		return points;
 	}
 	
 }

@@ -46,10 +46,7 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
 		
 		if(selected){
-			for(int i = 0; i < 2; i++){
-				g2d.setColor(Color.orange);
-				g2d.fillRect((int)points.get(i).x-2, (int)points.get(i).y-2, 4, 4);
-			}
+			drawResizePoints(g2d,line.getResizePoints());
 		}
 		
 //		draw center
@@ -62,8 +59,7 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), square.getSize(), square.getSize());
 		
 		if(selected){
-			g2d.setColor(Color.orange);
-			g2d.fillRect((int)ulc.x-2, (int)ulc.y-2, 4, 4);
+			drawResizePoints(g2d,square.getResizePoints());
 		}
 		
 //		draw center
@@ -76,8 +72,7 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), rectangle.getWidth(), rectangle.getHeight());
 		
 		if(selected){
-			g2d.setColor(Color.orange);
-			g2d.fillRect((int)ulc.x-2, (int)ulc.y-2, 4, 4);
+			drawResizePoints(g2d,rectangle.getResizePoints());
 		}
 		
 //		draw center
@@ -90,8 +85,7 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), circle.getRadius(), circle.getRadius());
 		
 		if(selected){
-			g2d.setColor(Color.orange);
-			g2d.fillRect((int)ulc.x-2, (int)ulc.y-2, 4, 4);
+			drawResizePoints(g2d,circle.getResizePoints());
 		}
 		
 //		draw center
@@ -104,8 +98,7 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), ellipse.getWidth(), ellipse.getHeight());
 		
 		if(selected){
-			g2d.setColor(Color.orange);
-			g2d.fillRect((int)ulc.x-2, (int)ulc.y-2, 4, 4);
+			drawResizePoints(g2d,ellipse.getResizePoints());
 		}
 		
 //		draw center
@@ -128,15 +121,19 @@ public class MyViewRefresher implements ViewRefresher{
 		g2d.fillPolygon(xs,ys,3);
 		
 		if(selected){
-			for(int i = 0; i < 3; i++){
-				g2d.setColor(Color.orange);
-				g2d.fillRect((int)points.get(i).x-2, (int)points.get(i).y-2, 4, 4);
-			}
+			drawResizePoints(g2d,triangle.getResizePoints());
 		}
 		
 //		draw center
 //		g2d.setColor(Color.BLACK);
 //		g2d.drawRect((int)triangle.getCenter().x, (int)triangle.getCenter().y, 2, 2);
+	}
+	
+	private void drawResizePoints(Graphics2D g2d, ArrayList<Point> points){
+		g2d.setColor(Color.orange);
+		for(int i = 0; i < points.size(); i++){
+			g2d.fillRect((int)points.get(i).x-2, (int)points.get(i).y-2, 4, 4);
+		}
 	}
 
 }

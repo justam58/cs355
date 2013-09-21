@@ -103,4 +103,8 @@ public class ShapeManager {
 		GUIFunctions.refresh();
 	}
 	
+	public Shape getSelectedShape(){
+		return shapes.get(selectedIndex);
+	}
+	
 }

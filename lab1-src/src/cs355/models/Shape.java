@@ -2,6 +2,7 @@ package cs355.models;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public abstract class Shape {
 
@@ -33,5 +34,7 @@ public abstract class Shape {
 	public abstract boolean contains(Point p);
 	
 	public abstract Point getCenter();
+	
+	public abstract ArrayList<Point> getResizePoints();
 	
 }

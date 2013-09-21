@@ -45,16 +45,28 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		}
 		
 		if(shapeManager.getCurrentMode() == Mode.SELECT){
-			ArrayList<Shape> shapes = shapeManager.getShapes();
-			for(int i = 0; i < shapes.size(); i++){
-				boolean contains = shapes.get(i).contains(p);
-				if(contains){
-					shapeManager.setSelectedIndex(i);
-					break;
+			boolean isResizing = false;
+			if(shapeManager.getSelectedIndex() != -1){
+				ArrayList<Point> resizePoints = shapeManager.getSelectedShape().getResizePoints();
+				for(int i = 0; i < resizePoints.size(); i++){
+					if(containsResizePoints(p,resizePoints.get(i))){
+						System.out.println("got resize points!");
+						isResizing = true;
+					}
 				}
-				else{
-					shapeManager.setSelectedIndex(-1);
-				}
+			}
+			if(!isResizing){
+				ArrayList<Shape> shapes = shapeManager.getShapes();
+				for(int i = 0; i < shapes.size(); i++){
+					boolean contains = shapes.get(i).contains(p);
+					if(contains){
+						shapeManager.setSelectedIndex(i);
+						break;
+					}
+					else{
+						shapeManager.setSelectedIndex(-1);
+					}
+				}		
 			}
 		}
 	}
@@ -160,5 +172,14 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		// no need
 	}
-
+	
+	public boolean containsResizePoints(Point clickedPoint, Point p) {
+		if(clickedPoint.y < (p.y - 2) ||
+		   clickedPoint.x < (p.x - 2) ||
+		   clickedPoint.y > (p.y + 2) ||
+		   clickedPoint.x > (p.x + 2) ){
+			return false;
+		}
+		return true;
+	}
 }
