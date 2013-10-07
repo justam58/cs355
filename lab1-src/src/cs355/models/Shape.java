@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public abstract class Shape {
 
 	private Color color;
+	protected Point center;
 	private double rotation;
 	
 	public Shape(){}
@@ -30,10 +31,14 @@ public abstract class Shape {
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
+	
+	public Point getCenter() {
+		return center;
+	}
 
 	public abstract boolean contains(Point p);
 	
-	public abstract Point getCenter();
+	public abstract void setCenter();
 	
 	public abstract ArrayList<Point> getResizePoints();
 	

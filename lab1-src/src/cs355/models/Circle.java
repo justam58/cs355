@@ -12,6 +12,7 @@ public class Circle extends Shape {
 	public Circle(Point start) {
 		upperLeftCorner = start;
 		this.start = start;
+		setEndPoint(start);
 	}
 
 	public void setEndPoint(Point end){
@@ -30,6 +31,22 @@ public class Circle extends Shape {
 		else{
 			upperLeftCorner = new Point(start.x, start.y); 
 		}
+		setCenter();
+	}
+	
+	public void setStart(Point s){
+		if(s.x > upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = upperLeftCorner;
+		}
+		else if(s.x > upperLeftCorner.x && s.y <= upperLeftCorner.y){
+			start = new Point(s.x - radius, s.y + radius);
+		}
+		else if(s.x <= upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = new Point(s.x + radius, s.y - radius);
+		}
+		else{
+			start = new Point(s.x + radius, s.y + radius);
+		}
 	}
 
 	public Point getUpperLeftCorner() {
@@ -46,8 +63,8 @@ public class Circle extends Shape {
 	}
 
 	@Override
-	public Point getCenter() {
-		return new Point(upperLeftCorner.x + radius/2, upperLeftCorner.y + radius/2);
+	public void setCenter() {
+		center = new Point(upperLeftCorner.x + radius/2, upperLeftCorner.y + radius/2);
 	}
 	
 	@Override

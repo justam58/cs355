@@ -20,8 +20,24 @@ public class Rectangle extends Shape{
 		height = Math.abs(start.y-end.y);
 		width = Math.abs(start.x-end.x);
 		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
+		setCenter();
 	}
 	
+	public void setStart(Point s){
+		if(s.x > upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = upperLeftCorner;
+		}
+		else if(s.x > upperLeftCorner.x && s.y <= upperLeftCorner.y){
+			start = new Point(s.x - width, s.y + height);
+		}
+		else if(s.x <= upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = new Point(s.x + width, s.y - height);
+		}
+		else{
+			start = new Point(s.x + width, s.y + height);
+		}
+	}
+
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
@@ -46,8 +62,8 @@ public class Rectangle extends Shape{
 	}
 
 	@Override
-	public Point getCenter() {
-		return new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
+	public void setCenter() {
+		center = new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
 	}
 	
 	@Override

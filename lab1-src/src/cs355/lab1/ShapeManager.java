@@ -39,6 +39,11 @@ public class ShapeManager {
 		shapes.set(totalIndex,shape);
 		GUIFunctions.refresh();
 	}
+	
+	public void updateResize(Shape shape){
+		shapes.set(selectedIndex,shape);
+		GUIFunctions.refresh();
+	}
 		
 	public void add(Shape shape){
 		shape.setColor(currentColor);

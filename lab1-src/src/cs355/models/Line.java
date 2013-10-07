@@ -15,9 +15,19 @@ public class Line extends Shape{
 	}
 
 	public void setEndPoint(Point end) {
-		points.set(1, end);;
+		points.set(1, end);
+		setCenter();
 	}
 
+	public void setStart(Point s){
+		int index = points.indexOf(s);
+		if(index == 0){
+			Point temp = points.get(1);
+			points.set(0, temp);
+		}
+		setEndPoint(s);
+	}
+	
 	public ArrayList<Point> getPoints() {
 		return points;
 	}
@@ -38,10 +48,10 @@ public class Line extends Shape{
 	}
 
 	@Override
-	public Point getCenter() {
+	public void setCenter() {
 		int xTotal = points.get(0).x + points.get(1).x;
 		int yTotal = points.get(0).y + points.get(1).y;
-		return new Point(xTotal/2, yTotal/2);
+		center = new Point(xTotal/2, yTotal/2);
 	}
 
 	@Override

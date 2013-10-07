@@ -31,8 +31,24 @@ public class Square extends Shape {
 		else{
 			upperLeftCorner = new Point(start.x, start.y); 
 		}
+		setCenter();
 	}
 	
+	public void setStart(Point s){
+		if(s.x > upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = upperLeftCorner;
+		}
+		else if(s.x > upperLeftCorner.x && s.y <= upperLeftCorner.y){
+			start = new Point(s.x - size, s.y + size);
+		}
+		else if(s.x <= upperLeftCorner.x && s.y > upperLeftCorner.y){
+			start = new Point(s.x + size, s.y - size);
+		}
+		else{
+			start = new Point(s.x + size, s.y + size);
+		}
+	}
+
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
@@ -53,8 +69,8 @@ public class Square extends Shape {
 	}
 
 	@Override
-	public Point getCenter() {
-		return new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
+	public void setCenter() {
+		center = new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
 	}
 	
 	@Override

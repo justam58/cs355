@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Triangle extends Shape{
 	
 	ArrayList<Point> points;
+	int selectedIndex;
 	
 	public Triangle(Point a) {
 		points = new ArrayList<Point>();
@@ -21,11 +22,18 @@ public class Triangle extends Shape{
 	}
 
 	public void addPoint(Point point) {
-		if(getPointsSize() == 3){
-			System.out.println("ERROR: Triangle can only has 3 points.");
-			return;
-		}
 		points.add(point);
+		if(getPointsSize() == 3){
+			setCenter();
+		}
+	}
+	
+	public void updateSelectedPoint(Point s){
+		points.set(selectedIndex, s);
+	}
+	
+	public void setSelectedPoint(Point s){
+		selectedIndex = points.indexOf(s);
 	}
 
 	@Override
@@ -44,14 +52,14 @@ public class Triangle extends Shape{
 	}
 
 	@Override
-	public Point getCenter() {
+	public void setCenter() {
 		int xTotal = 0;
 		int yTotal = 0;
 		for(int i = 0; i < 3; i++){
 			xTotal += points.get(i).x;
 			yTotal += points.get(i).y;
 		}
-		return new Point(xTotal/3, yTotal/3);
+		center = new Point(xTotal/3, yTotal/3);
 	}
 	
 	private float sign(Point p1, Point p2, Point p3) {
