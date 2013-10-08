@@ -35,10 +35,12 @@ public abstract class Shape {
 	public Point getCenter() {
 		return center;
 	}
-
+	
+	public abstract void move(int d_x, int d_y);
+	
 	public abstract boolean contains(Point p);
 	
-	public abstract void setCenter();
+	public abstract void calculateCenter();
 	
 	public abstract ArrayList<Point> getResizePoints();
 	

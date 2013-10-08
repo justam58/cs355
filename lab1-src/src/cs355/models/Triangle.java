@@ -24,7 +24,7 @@ public class Triangle extends Shape{
 	public void addPoint(Point point) {
 		points.add(point);
 		if(getPointsSize() == 3){
-			setCenter();
+			calculateCenter();
 		}
 	}
 	
@@ -33,7 +33,19 @@ public class Triangle extends Shape{
 	}
 	
 	public void setSelectedPoint(Point s){
-		selectedIndex = points.indexOf(s);
+		selectedIndex = indexOf(s);
+	}
+	
+	private int indexOf(Point p){
+		int result = -1;
+		for(int i = 0; i < points.size(); i++){
+			if(Math.abs(points.get(i).x - p.x) <= 2 &&
+			   Math.abs(points.get(i).y - p.y) <= 2){
+				result = i;
+				break;
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -52,7 +64,7 @@ public class Triangle extends Shape{
 	}
 
 	@Override
-	public void setCenter() {
+	public void calculateCenter() {
 		int xTotal = 0;
 		int yTotal = 0;
 		for(int i = 0; i < 3; i++){
@@ -69,6 +81,12 @@ public class Triangle extends Shape{
 	@Override
 	public ArrayList<Point> getResizePoints() {
 		return points;
+	}
+
+	@Override
+	public void move(int d_x, int d_y) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

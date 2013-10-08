@@ -16,11 +16,11 @@ public class Line extends Shape{
 
 	public void setEndPoint(Point end) {
 		points.set(1, end);
-		setCenter();
+		calculateCenter();
 	}
 
 	public void setStart(Point s){
-		int index = points.indexOf(s);
+		int index = indexOf(s);
 		if(index == 0){
 			Point temp = points.get(1);
 			points.set(0, temp);
@@ -30,6 +30,18 @@ public class Line extends Shape{
 	
 	public ArrayList<Point> getPoints() {
 		return points;
+	}
+	
+	private int indexOf(Point p){
+		int result = -1;
+		for(int i = 0; i < points.size(); i++){
+			if(Math.abs(points.get(i).x - p.x) <= HIT_BOX_SIZE &&
+			   Math.abs(points.get(i).y - p.y) <= HIT_BOX_SIZE){
+				result = i;
+				break;
+			}
+		}
+		return result;
 	}
 	
 	@Override
@@ -48,7 +60,7 @@ public class Line extends Shape{
 	}
 
 	@Override
-	public void setCenter() {
+	public void calculateCenter() {
 		int xTotal = points.get(0).x + points.get(1).x;
 		int yTotal = points.get(0).y + points.get(1).y;
 		center = new Point(xTotal/2, yTotal/2);
@@ -57,6 +69,12 @@ public class Line extends Shape{
 	@Override
 	public ArrayList<Point> getResizePoints() {
 		return points;
+	}
+
+	@Override
+	public void move(int d_x, int d_y) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

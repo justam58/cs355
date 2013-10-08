@@ -12,9 +12,13 @@ import cs355.models.*;
 public class MyMouseListener implements MouseListener, MouseMotionListener{
 	
 	private ShapeManager shapeManager = ShapeManager.getInstance(); 
+	private boolean resizing;
 	private boolean dragging;
+	private int d_dragStartX;
+	private int d_dragStartY;
 	
 	private void initDrag() {
+		resizing = false;
 		dragging = false;
 	}
 
@@ -36,7 +40,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 				Triangle triangle = (Triangle) shapeManager.getCurrentShape();
 				if(triangle.getPointsSize() == 1){
 					triangle.addPoint(p);
-					shapeManager.update(triangle);
+					shapeManager.updateDrawingShape(triangle);
 					//System.out.println("continue triangle");
 				}
 				else if(triangle.getPointsSize() == 2){
@@ -70,9 +74,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 			if(shapeManager.getSelectedIndex() != -1){
 				Shape shape = shapeManager.getSelectedShape();
 				ArrayList<Point> resizePoints = shape.getResizePoints();
+				boolean foundResizePoint = false;
 				for(int i = 0; i < resizePoints.size(); i++){
 					if(containsPoint(p,resizePoints.get(i))){
-//						System.out.println("got resize points!");
+						foundResizePoint = true;
 						String shapeType = shape.getClass().getName();
 						switch(shapeType){
 							case "cs355.models.Line" :			Line line = (Line) shape;
@@ -96,12 +101,18 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 							default:							System.out.printf("Invalid Shape : %s\n" ,shapeType);
 			                									break;
 						}
-						shapeManager.updateResize(shape);
-						dragging = true;
+						shapeManager.updateSelectedShape(shape);
+						resizing = true;
+						break;
 					}
 				}
+				if(!foundResizePoint){
+					dragging = true;
+					d_dragStartX = e.getX();
+					d_dragStartY = e.getY();		
+				}
 			}
-			if(!dragging){
+			if(!resizing){
 				ArrayList<Shape> shapes = shapeManager.getShapes();
 				for(int i = 0; i < shapes.size(); i++){
 					boolean contains = shapes.get(i).contains(p);
@@ -116,7 +127,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 			}
 		}
 		else if(shapeManager.getCurrentMode() != Mode.TRIANGLE){
-			dragging = true;
+			resizing = true;
 			
 			Point start = new Point(e.getX(),e.getY());
 			
@@ -150,8 +161,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		if (dragging && (shapeManager.getCurrentMode() != Mode.TRIANGLE)){	
-			shapeManager.moveOn();
+		if ((resizing || dragging) && (shapeManager.getCurrentMode() != Mode.TRIANGLE)){
+			if(shapeManager.getCurrentMode() != Mode.SELECT){
+				shapeManager.moveOn();
+			}
 			initDrag();
 		}
 	}
@@ -159,8 +172,39 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
-		if (dragging) {	
-			//System.out.printf("dragging: %d %d\n", e.getX(),e.getY());
+		if(dragging){
+			int d_deltaX = (e.getX() - d_dragStartX);
+			int d_deltaY = (e.getY() - d_dragStartY);
+
+			Shape shape = shapeManager.getSelectedShape();
+			String shapeType = shape.getClass().getName();
+			switch(shapeType){
+				case "cs355.models.Line" :			Line line = (Line) shape;
+													line.move(d_deltaX,d_deltaY);
+													break;
+				case "cs355.models.Square" :		Square square = (Square) shape;
+													square.move(d_deltaX,d_deltaY);
+													break;
+				case "cs355.models.Rectangle" :		Rectangle rectangle = (Rectangle) shape;
+													rectangle.move(d_deltaX,d_deltaY);
+													break;
+				case "cs355.models.Circle" :		Circle circle = (Circle) shape;
+													circle.move(d_deltaX,d_deltaY);
+													break;
+				case "cs355.models.Ellipse" :		Ellipse ellipse = (Ellipse) shape;
+													ellipse.move(d_deltaX,d_deltaY);
+													break;
+				case "cs355.models.Triangle" :		Triangle triangle = (Triangle) shape;
+													triangle.move(d_deltaX,d_deltaY);
+													break;		
+				default:							System.out.printf("Invalid Shape : %s\n" ,shapeType);
+	            									break;
+			}
+			shapeManager.updateSelectedShape(shape);
+		}
+		
+		if (resizing) {	
+			//System.out.printf("resizing: %d %d\n", e.getX(),e.getY());
 
 			Point end = new Point(e.getX(),e.getY());
 			
@@ -189,37 +233,37 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 					default:							System.out.printf("Invalid Shape : %s\n" ,shapeType);
 	                									break;
 				}
-				shapeManager.updateResize(shape);
+				shapeManager.updateSelectedShape(shape);
 			}
 			
 			if (shapeManager.getCurrentMode() == Mode.LINE){
 				Line shape = (Line) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapeManager.update(shape);
+				shapeManager.updateDrawingShape(shape);
 			}
 			
 			if (shapeManager.getCurrentMode() == Mode.RECTANGLE){
 				Rectangle shape = (Rectangle) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapeManager.update(shape);
+				shapeManager.updateDrawingShape(shape);
 			}
 			
 			if (shapeManager.getCurrentMode() == Mode.SQUARE){
 				Square shape = (Square) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapeManager.update(shape);
+				shapeManager.updateDrawingShape(shape);
 			}
 			
 			if (shapeManager.getCurrentMode() == Mode.ELLIPSE){
 				Ellipse shape = (Ellipse) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapeManager.update(shape);
+				shapeManager.updateDrawingShape(shape);
 			}
 			
 			if (shapeManager.getCurrentMode() == Mode.CIRCLE){
 				Circle shape = (Circle) shapeManager.getCurrentShape();
 				shape.setEndPoint(end);
-				shapeManager.update(shape);
+				shapeManager.updateDrawingShape(shape);
 			}
 		}
 	}

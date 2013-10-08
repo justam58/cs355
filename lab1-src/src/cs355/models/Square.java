@@ -31,21 +31,22 @@ public class Square extends Shape {
 		else{
 			upperLeftCorner = new Point(start.x, start.y); 
 		}
-		setCenter();
+		calculateCenter();
 	}
 	
 	public void setStart(Point s){
-		if(s.x > upperLeftCorner.x && s.y > upperLeftCorner.y){
-			start = upperLeftCorner;
+		int index = indexOf(s);
+		if(index == 0){
+			start = getResizePoints().get(2);
 		}
-		else if(s.x > upperLeftCorner.x && s.y <= upperLeftCorner.y){
-			start = new Point(s.x - size, s.y + size);
+		else if(index == 1){
+			start = getResizePoints().get(3);
 		}
-		else if(s.x <= upperLeftCorner.x && s.y > upperLeftCorner.y){
-			start = new Point(s.x + size, s.y - size);
+		else if(index == 2){
+			start = getResizePoints().get(0);
 		}
 		else{
-			start = new Point(s.x + size, s.y + size);
+			start = getResizePoints().get(1);
 		}
 	}
 
@@ -55,6 +56,19 @@ public class Square extends Shape {
 
 	public int getSize() {
 		return size;
+	}
+	
+	private int indexOf(Point p){
+		ArrayList<Point> points = getResizePoints();
+		int result = -1;
+		for(int i = 0; i < points.size(); i++){
+			if(Math.abs(points.get(i).x - p.x) <= 2 &&
+			   Math.abs(points.get(i).y - p.y) <= 2){
+				result = i;
+				break;
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -69,7 +83,7 @@ public class Square extends Shape {
 	}
 
 	@Override
-	public void setCenter() {
+	public void calculateCenter() {
 		center = new Point(upperLeftCorner.x + size/2, upperLeftCorner.y + size/2);
 	}
 	
@@ -81,6 +95,12 @@ public class Square extends Shape {
 		bPoints.add(new Point(upperLeftCorner.x + size, upperLeftCorner.y + size));
 		bPoints.add(new Point(upperLeftCorner.x, upperLeftCorner.y + size));
 		return bPoints;
+	}
+
+	@Override
+	public void move(int d_x, int d_y) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -35,12 +35,12 @@ public class ShapeManager {
 		return shapes;
 	}
 	
-	public void update(Shape shape){
+	public void updateDrawingShape(Shape shape){
 		shapes.set(totalIndex,shape);
 		GUIFunctions.refresh();
 	}
 	
-	public void updateResize(Shape shape){
+	public void updateSelectedShape(Shape shape){
 		shapes.set(selectedIndex,shape);
 		GUIFunctions.refresh();
 	}
@@ -54,6 +54,7 @@ public class ShapeManager {
 	}
 	
 	public void moveOn(){
+		System.out.println("move on");
 		totalIndex++;
 		setTriangleStarted(false);
 		GUIFunctions.refresh();

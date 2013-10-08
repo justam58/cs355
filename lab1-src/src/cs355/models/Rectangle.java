@@ -20,21 +20,22 @@ public class Rectangle extends Shape{
 		height = Math.abs(start.y-end.y);
 		width = Math.abs(start.x-end.x);
 		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
-		setCenter();
+		calculateCenter();
 	}
 	
 	public void setStart(Point s){
-		if(s.x > upperLeftCorner.x && s.y > upperLeftCorner.y){
-			start = upperLeftCorner;
+		int index = indexOf(s);
+		if(index == 0){
+			start = getResizePoints().get(2);
 		}
-		else if(s.x > upperLeftCorner.x && s.y <= upperLeftCorner.y){
-			start = new Point(s.x - width, s.y + height);
+		else if(index == 1){
+			start = getResizePoints().get(3);
 		}
-		else if(s.x <= upperLeftCorner.x && s.y > upperLeftCorner.y){
-			start = new Point(s.x + width, s.y - height);
+		else if(index == 2){
+			start = getResizePoints().get(0);
 		}
 		else{
-			start = new Point(s.x + width, s.y + height);
+			start = getResizePoints().get(1);
 		}
 	}
 
@@ -49,6 +50,19 @@ public class Rectangle extends Shape{
 	public int getWidth() {
 		return width;
 	}
+	
+	private int indexOf(Point p){
+		ArrayList<Point> points = getResizePoints();
+		int result = -1;
+		for(int i = 0; i < points.size(); i++){
+			if(Math.abs(points.get(i).x - p.x) <= 2 &&
+			   Math.abs(points.get(i).y - p.y) <= 2){
+				result = i;
+				break;
+			}
+		}
+		return result;
+	}
 
 	@Override
 	public boolean contains(Point p) {
@@ -62,7 +76,7 @@ public class Rectangle extends Shape{
 	}
 
 	@Override
-	public void setCenter() {
+	public void calculateCenter() {
 		center = new Point(upperLeftCorner.x + width/2, upperLeftCorner.y + height/2);
 	}
 	
@@ -74,5 +88,11 @@ public class Rectangle extends Shape{
 		bPoints.add(new Point(upperLeftCorner.x + width, upperLeftCorner.y + height));
 		bPoints.add(new Point(upperLeftCorner.x, upperLeftCorner.y + height));
 		return bPoints;
+	}
+
+	@Override
+	public void move(int d_x, int d_y) {
+		// TODO Auto-generated method stub
+		
 	}
 }
