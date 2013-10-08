@@ -86,8 +86,9 @@ public class Ellipse extends Shape{
 
 	@Override
 	public void move(int d_x, int d_y) {
-		// TODO Auto-generated method stub
-		
+		upperLeftCorner.x += d_x;
+		upperLeftCorner.y += d_y;
+		calculateCenter();
 	}
 
 }

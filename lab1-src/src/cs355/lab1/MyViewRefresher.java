@@ -50,8 +50,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)line.getCenter().x, (int)line.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)line.getCenter().x, (int)line.getCenter().y, 2, 2);
 	}
 	
 	private void drawSquare(Graphics2D g2d, Square square, boolean selected){
@@ -63,8 +63,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)square.getCenter().x, (int)square.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)square.getCenter().x, (int)square.getCenter().y, 2, 2);
 	}
 	
 	private void drawRectangle(Graphics2D g2d, Rectangle rectangle, boolean selected){
@@ -76,8 +76,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)rectangle.getCenter().x, (int)rectangle.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)rectangle.getCenter().x, (int)rectangle.getCenter().y, 2, 2);
 	}
 	
 	private void drawCircle(Graphics2D g2d, Circle circle, boolean selected){
@@ -89,8 +89,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)circle.getCenter().x, (int)circle.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)circle.getCenter().x, (int)circle.getCenter().y, 2, 2);
 	}
 	
 	private void drawEllipse(Graphics2D g2d, Ellipse ellipse, boolean selected){
@@ -102,8 +102,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)ellipse.getCenter().x, (int)ellipse.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)ellipse.getCenter().x, (int)ellipse.getCenter().y, 2, 2);
 	}
 	
 	private void drawTrianagle(Graphics2D g2d, Triangle triangle, boolean selected){
@@ -125,8 +125,8 @@ public class MyViewRefresher implements ViewRefresher{
 		}
 		
 //		draw center
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawRect((int)triangle.getCenter().x, (int)triangle.getCenter().y, 2, 2);
+		g2d.setColor(Color.BLACK);
+		g2d.drawRect((int)triangle.getCenter().x, (int)triangle.getCenter().y, 2, 2);
 	}
 	
 	private void drawResizePoints(Graphics2D g2d, ArrayList<Point> points){

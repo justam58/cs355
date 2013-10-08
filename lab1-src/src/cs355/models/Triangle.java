@@ -30,6 +30,7 @@ public class Triangle extends Shape{
 	
 	public void updateSelectedPoint(Point s){
 		points.set(selectedIndex, s);
+		calculateCenter();
 	}
 	
 	public void setSelectedPoint(Point s){
@@ -85,8 +86,11 @@ public class Triangle extends Shape{
 
 	@Override
 	public void move(int d_x, int d_y) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < points.size(); i++){
+			points.get(i).x += d_x;
+			points.get(i).y += d_y;
+		}
+		calculateCenter();
 	}
 	
 }

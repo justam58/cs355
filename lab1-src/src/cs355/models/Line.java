@@ -73,8 +73,11 @@ public class Line extends Shape{
 
 	@Override
 	public void move(int d_x, int d_y) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < points.size(); i++){
+			points.get(i).x += d_x;
+			points.get(i).y += d_y;
+		}
+		calculateCenter();
 	}
 	
 }

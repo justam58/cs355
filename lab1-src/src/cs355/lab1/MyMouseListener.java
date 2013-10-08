@@ -106,10 +106,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 						break;
 					}
 				}
-				if(!foundResizePoint){
+				if(!foundResizePoint && shapeManager.getSelectedShape().contains(p)){
 					dragging = true;
-					d_dragStartX = e.getX();
-					d_dragStartY = e.getY();		
+					d_dragStartX = p.x;
+					d_dragStartY = p.y;		
 				}
 			}
 			if(!resizing){
@@ -173,8 +173,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	public void mouseDragged(MouseEvent e) {
 		
 		if(dragging){
+			
 			int d_deltaX = (e.getX() - d_dragStartX);
 			int d_deltaY = (e.getY() - d_dragStartY);
+			
+			d_dragStartX = e.getX();
+			d_dragStartY = e.getY();
 
 			Shape shape = shapeManager.getSelectedShape();
 			String shapeType = shape.getClass().getName();
