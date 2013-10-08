@@ -60,6 +60,7 @@ public class MyViewRefresher implements ViewRefresher{
 		
 		if(selected){
 			drawResizePoints(g2d,square.getResizePoints());
+			g2d.fillRect((int)square.getRotatePoint().x-2, (int)square.getRotatePoint().y-2, 4, 4);
 		}
 		
 //		draw center
@@ -73,6 +74,7 @@ public class MyViewRefresher implements ViewRefresher{
 		
 		if(selected){
 			drawResizePoints(g2d,rectangle.getResizePoints());
+			g2d.fillRect((int)rectangle.getRotatePoint().x-2, (int)rectangle.getRotatePoint().y-2, 4, 4);
 		}
 		
 //		draw center
@@ -86,6 +88,7 @@ public class MyViewRefresher implements ViewRefresher{
 		
 		if(selected){
 			drawResizePoints(g2d,circle.getResizePoints());
+			g2d.fillRect((int)circle.getRotatePoint().x-2, (int)circle.getRotatePoint().y-2, 4, 4);
 		}
 		
 //		draw center
@@ -99,6 +102,7 @@ public class MyViewRefresher implements ViewRefresher{
 		
 		if(selected){
 			drawResizePoints(g2d,ellipse.getResizePoints());
+			g2d.fillRect((int)ellipse.getRotatePoint().x-2, (int)ellipse.getRotatePoint().y-2, 4, 4);
 		}
 		
 //		draw center
@@ -122,6 +126,7 @@ public class MyViewRefresher implements ViewRefresher{
 		
 		if(selected){
 			drawResizePoints(g2d,triangle.getResizePoints());
+			g2d.fillRect((int)triangle.getRotatePoint().x-2, (int)triangle.getRotatePoint().y-2, 4, 4);
 		}
 		
 //		draw center

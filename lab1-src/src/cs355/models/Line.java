@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Line extends Shape{
 	
 	private ArrayList<Point> points;
-	private static final int HIT_BOX_SIZE = 3;
+	private static final int HIT_BOX_SIZE = 4;
 	
 	public Line(Point start) {
 		points = new ArrayList<Point>();
@@ -78,6 +78,11 @@ public class Line extends Shape{
 			points.get(i).y += d_y;
 		}
 		calculateCenter();
+	}
+
+	@Override
+	public Point getRotatePoint() {
+		return null;
 	}
 	
 }

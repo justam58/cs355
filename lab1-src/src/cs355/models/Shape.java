@@ -44,4 +44,6 @@ public abstract class Shape {
 	
 	public abstract ArrayList<Point> getResizePoints();
 	
+	public abstract Point getRotatePoint();
+	
 }

@@ -91,4 +91,12 @@ public class Ellipse extends Shape{
 		calculateCenter();
 	}
 
+	@Override
+	public Point getRotatePoint() {
+		ArrayList<Point> points = getResizePoints();
+		Point a = points.get(0);
+		Point b = points.get(1);
+		return new Point((a.x+b.x)/2,(a.y+b.y-30)/2);
+	}
+
 }
