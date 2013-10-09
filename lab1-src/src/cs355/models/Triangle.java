@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Triangle extends Shape{
@@ -51,15 +52,23 @@ public class Triangle extends Shape{
 
 	@Override
 	public boolean contains(Point p) {
+		AffineTransform at = new AffineTransform();
+		at.rotate(-rotation, center.x, center.y);
+		at.translate(p.x, p.y);
+		int x = (int) at.getTranslateX();
+		int y = (int) at.getTranslateY();
+		
+		Point pp = new Point(x,y);
+		
 		Point p1 = points.get(0);
 		Point p2 = points.get(1);
 		Point p3 = points.get(2);
 
 		boolean b1, b2, b3;
 		
-		b1 = sign(p, p1, p2) < 0.0f;
-		b2 = sign(p, p2, p3) < 0.0f;
-		b3 = sign(p, p3, p1) < 0.0f;
+		b1 = sign(pp, p1, p2) < 0.0f;
+		b2 = sign(pp, p2, p3) < 0.0f;
+		b3 = sign(pp, p3, p1) < 0.0f;
 		
 		return ((b1 == b2) && (b2 == b3));
 	}
@@ -98,9 +107,9 @@ public class Triangle extends Shape{
 		ArrayList<Point> points = getResizePoints();
 		Point a = points.get(0);
 		Point b = points.get(1);
-		Point result = new Point((a.x+b.x)/2,(a.y+b.y-30)/2);
+		Point result = new Point((a.x+b.x-50)/2,(a.y+b.y-50)/2);
 		if(this.contains(result)){
-			result = new Point((a.x+b.x)/2,(a.y+b.y+30)/2);
+			result = new Point((a.x+b.x+50)/2,(a.y+b.y+50)/2);
 		}
 		return result;
 	}

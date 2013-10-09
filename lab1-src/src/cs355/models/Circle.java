@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Circle extends Shape {
@@ -73,7 +74,12 @@ public class Circle extends Shape {
 
 	@Override
 	public boolean contains(Point p) {
-		return (Math.pow(p.x - getCenter().x, 2) + Math.pow(p.y - getCenter().y, 2) <= Math.pow(radius/2.0, 2));
+		AffineTransform at = new AffineTransform();
+		at.rotate(-rotation, center.x, center.y);
+		at.translate(p.x, p.y);
+		double x = at.getTranslateX();
+		double y = at.getTranslateY();
+		return (Math.pow(x - getCenter().x, 2) + Math.pow(y - getCenter().y, 2) <= Math.pow(radius/2.0, 2));
 	}
 
 	@Override

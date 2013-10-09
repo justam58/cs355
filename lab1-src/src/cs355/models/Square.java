@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Square extends Shape {
@@ -73,11 +74,16 @@ public class Square extends Shape {
 
 	@Override
 	public boolean contains(Point p) {
-		if(p.y < upperLeftCorner.y ||
-		   p.x < upperLeftCorner.x ||
-		   p.y > upperLeftCorner.y + size ||
-		   p.x > upperLeftCorner.x + size ){
-			return false;
+		AffineTransform at = new AffineTransform();
+		at.rotate(-rotation, center.x, center.y);
+		at.translate(p.x, p.y);
+		double x = at.getTranslateX();
+		double y = at.getTranslateY();
+		if(Math.abs(y - center.y) > size/2 ||
+		   Math.abs(x - center.x) > size/2 ||
+		   Math.abs(y - center.y) > size/2 ||
+		   Math.abs(x - center.x) > size/2 ){
+				return false;
 		}
 		return true;
 	}

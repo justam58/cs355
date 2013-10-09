@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import cs355.lab1.ShapeManager.Mode;
@@ -27,7 +28,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		System.out.printf("click: %d %d\n", e.getX(),e.getY());
+		//System.out.printf("click: %d %d\n", e.getX(),e.getY());
 		
 		Point p = new Point(e.getX(),e.getY());
 		
@@ -77,15 +78,13 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 				Shape shape = shapeManager.getSelectedShape();
 				ArrayList<Point> resizePoints = shape.getResizePoints();
 				boolean foundResizePoint = false;
-				boolean isLine = false;
 				for(int i = 0; i < resizePoints.size(); i++){
-					if(containsPoint(p,resizePoints.get(i))){
+					if(containsPoint(p,resizePoints.get(i),shape.getRotation(),shape.getCenter())){
 						foundResizePoint = true;
 						String shapeType = shape.getClass().getName();
 						switch(shapeType){
 							case "cs355.models.Line" :			Line line = (Line) shape;
 																line.setStart(p);
-																isLine = true;
 																break;
 							case "cs355.models.Square" :		Square square = (Square) shape;
 																square.setStart(p);
@@ -111,15 +110,18 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 						break;
 					}
 				}
+				System.out.printf("selected index is %d\n",shapeManager.getSelectedIndex());
 				if(!foundResizePoint && shapeManager.getSelectedShape().contains(p)){
 					System.out.println("drag");
 					dragging = true;
 					d_dragStartX = p.x;
 					d_dragStartY = p.y;		
 				}
-				else if(!foundResizePoint && !isLine && containsPoint(p,shapeManager.getSelectedShape().getRotatePoint())){
+				else if(!foundResizePoint && shapeManager.getSelectedShape().getClass().getName() != "cs355.models.Circle" && 
+						shapeManager.getSelectedShape().getClass().getName() != "cs355.models.Line" &&
+						containsPoint(p,shapeManager.getSelectedShape().getRotatePoint(),shape.getRotation(),shape.getCenter())){
 					System.out.println("rotate");
-					rotating = true;	
+					rotating = true;
 				}
 			}
 			if(!resizing && !rotating && !dragging){
@@ -182,13 +184,18 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
+		//System.out.printf("dragging: %d %d\n", e.getX(),e.getY());
+		
 		Point end = new Point(e.getX(),e.getY());
 		
 		if(rotating){
 			Shape shape = shapeManager.getSelectedShape();
-			double angle = getRotateAngle(shape.getCenter(),end) - Math.PI/2;
-			shape.setRotation(angle);
-			shapeManager.updateSelectedShape(shape);
+			if(shape.getClass().getName() != "cs355.models.Line" &&
+			   shape.getClass().getName() != "cs355.models.Circle" ){
+				double angle = getRotateAngle(shape.getCenter(),end) - Math.PI/2;
+				shape.setRotation(angle);
+				shapeManager.updateSelectedShape(shape);
+			}
 		}
 		
 		if(dragging){
@@ -227,7 +234,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		}
 		
 		if (resizing) {	
-			//System.out.printf("resizing: %d %d\n", e.getX(),e.getY());
 			
 			if(shapeManager.getCurrentMode() == Mode.SELECT){
 				Shape shape = shapeManager.getSelectedShape();
@@ -300,7 +306,11 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		return Math.atan2(y, x);
 	}
 	
-	public boolean containsPoint(Point clickedPoint, Point p) {
+	public boolean containsPoint(Point clickedPoint, Point p, double rotation, Point center) {
+		AffineTransform at = new AffineTransform();
+		at.rotate(-rotation, center.x, center.y);
+		at.translate(clickedPoint.x, clickedPoint.y);
+		clickedPoint = new Point((int)at.getTranslateX(),(int)at.getTranslateY());
 		if(clickedPoint.y < (p.y - 2) ||
 		   clickedPoint.x < (p.x - 2) ||
 		   clickedPoint.y > (p.y + 2) ||
