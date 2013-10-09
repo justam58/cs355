@@ -56,8 +56,8 @@ public class MyViewRefresher implements ViewRefresher{
 	
 	private void drawSquare(Graphics2D g2d, Square square, boolean selected){
 		Point ulc = square.getUpperLeftCorner();
+		g2d.rotate(square.getRotation(),square.getCenter().x,square.getCenter().y);
 		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), square.getSize(), square.getSize());
-		
 		if(selected){
 			drawResizePoints(g2d,square.getResizePoints());
 			g2d.fillRect((int)square.getRotatePoint().x-2, (int)square.getRotatePoint().y-2, 4, 4);
@@ -66,10 +66,12 @@ public class MyViewRefresher implements ViewRefresher{
 //		draw center
 		g2d.setColor(Color.BLACK);
 		g2d.drawRect((int)square.getCenter().x, (int)square.getCenter().y, 2, 2);
+		g2d.rotate(-square.getRotation(),square.getCenter().x,square.getCenter().y);
 	}
 	
 	private void drawRectangle(Graphics2D g2d, Rectangle rectangle, boolean selected){
 		Point ulc = rectangle.getUpperLeftCorner();
+		g2d.rotate(rectangle.getRotation(),rectangle.getCenter().x,rectangle.getCenter().y);
 		g2d.fillRect((int)ulc.getX(), (int)ulc.getY(), rectangle.getWidth(), rectangle.getHeight());
 		
 		if(selected){
@@ -80,10 +82,12 @@ public class MyViewRefresher implements ViewRefresher{
 //		draw center
 		g2d.setColor(Color.BLACK);
 		g2d.drawRect((int)rectangle.getCenter().x, (int)rectangle.getCenter().y, 2, 2);
+		g2d.rotate(-rectangle.getRotation(),rectangle.getCenter().x,rectangle.getCenter().y);
 	}
 	
 	private void drawCircle(Graphics2D g2d, Circle circle, boolean selected){
 		Point ulc = circle.getUpperLeftCorner();
+		g2d.rotate(circle.getRotation(),circle.getCenter().x,circle.getCenter().y);
 		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), circle.getRadius(), circle.getRadius());
 		
 		if(selected){
@@ -94,10 +98,12 @@ public class MyViewRefresher implements ViewRefresher{
 //		draw center
 		g2d.setColor(Color.BLACK);
 		g2d.drawRect((int)circle.getCenter().x, (int)circle.getCenter().y, 2, 2);
+		g2d.rotate(-circle.getRotation(),circle.getCenter().x,circle.getCenter().y);
 	}
 	
 	private void drawEllipse(Graphics2D g2d, Ellipse ellipse, boolean selected){
 		Point ulc = ellipse.getUpperLeftCorner();
+		g2d.rotate(ellipse.getRotation(),ellipse.getCenter().x,ellipse.getCenter().y);
 		g2d.fillOval((int)ulc.getX(), (int)ulc.getY(), ellipse.getWidth(), ellipse.getHeight());
 		
 		if(selected){
@@ -108,6 +114,7 @@ public class MyViewRefresher implements ViewRefresher{
 //		draw center
 		g2d.setColor(Color.BLACK);
 		g2d.drawRect((int)ellipse.getCenter().x, (int)ellipse.getCenter().y, 2, 2);
+		g2d.rotate(-ellipse.getRotation(),ellipse.getCenter().x,ellipse.getCenter().y);
 	}
 	
 	private void drawTrianagle(Graphics2D g2d, Triangle triangle, boolean selected){

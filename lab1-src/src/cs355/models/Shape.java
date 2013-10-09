@@ -8,7 +8,7 @@ public abstract class Shape {
 
 	private Color color;
 	protected Point center;
-	private double rotation;
+	protected double rotation;
 	
 	public Shape(){}
 	

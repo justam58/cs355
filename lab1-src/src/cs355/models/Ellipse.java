@@ -66,7 +66,14 @@ public class Ellipse extends Shape{
 
 	@Override
 	public boolean contains(Point p) {
-		return (Math.pow((p.x - getCenter().x)/(width/2.0), 2) + Math.pow((p.y - getCenter().y)/(height/2.0), 2) <= 1);
+		System.out.println(Math.toDegrees(rotation));
+		Point pp = new Point(p);
+		pp.x -= center.x;
+		pp.y -= center.y;
+		pp.x = (int)(Math.cos(rotation)*pp.x-Math.sin(rotation)*pp.y);
+		pp.y = (int)(Math.sin(rotation)*pp.x+Math.cos(rotation)*pp.y);
+		System.out.println(pp);
+		return (Math.pow(pp.x/(width/2.0), 2) + Math.pow(pp.y/(height/2.0), 2) <= 1);
 	}
 
 	@Override

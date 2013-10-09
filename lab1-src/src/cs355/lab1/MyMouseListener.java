@@ -14,12 +14,14 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	private ShapeManager shapeManager = ShapeManager.getInstance(); 
 	private boolean resizing;
 	private boolean dragging;
+	private boolean rotating;
 	private int d_dragStartX;
 	private int d_dragStartY;
 	
 	private void initDrag() {
 		resizing = false;
 		dragging = false;
+		rotating = false;
 	}
 
 	@Override
@@ -75,6 +77,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 				Shape shape = shapeManager.getSelectedShape();
 				ArrayList<Point> resizePoints = shape.getResizePoints();
 				boolean foundResizePoint = false;
+				boolean isLine = false;
 				for(int i = 0; i < resizePoints.size(); i++){
 					if(containsPoint(p,resizePoints.get(i))){
 						foundResizePoint = true;
@@ -82,6 +85,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 						switch(shapeType){
 							case "cs355.models.Line" :			Line line = (Line) shape;
 																line.setStart(p);
+																isLine = true;
 																break;
 							case "cs355.models.Square" :		Square square = (Square) shape;
 																square.setStart(p);
@@ -103,16 +107,22 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 						}
 						shapeManager.updateSelectedShape(shape);
 						resizing = true;
+						System.out.println("resize");
 						break;
 					}
 				}
 				if(!foundResizePoint && shapeManager.getSelectedShape().contains(p)){
+					System.out.println("drag");
 					dragging = true;
 					d_dragStartX = p.x;
 					d_dragStartY = p.y;		
 				}
+				else if(!foundResizePoint && !isLine && containsPoint(p,shapeManager.getSelectedShape().getRotatePoint())){
+					System.out.println("rotate");
+					rotating = true;	
+				}
 			}
-			if(!resizing){
+			if(!resizing && !rotating && !dragging){
 				ArrayList<Shape> shapes = shapeManager.getShapes();
 				for(int i = 0; i < shapes.size(); i++){
 					boolean contains = shapes.get(i).contains(p);
@@ -161,7 +171,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 
-		if ((resizing || dragging) && (shapeManager.getCurrentMode() != Mode.TRIANGLE)){
+		if ((resizing || dragging || rotating) && (shapeManager.getCurrentMode() != Mode.TRIANGLE)){
 			if(shapeManager.getCurrentMode() != Mode.SELECT){
 				shapeManager.moveOn();
 			}
@@ -172,13 +182,22 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
+		Point end = new Point(e.getX(),e.getY());
+		
+		if(rotating){
+			Shape shape = shapeManager.getSelectedShape();
+			double angle = getRotateAngle(shape.getCenter(),end) - Math.PI/2;
+			shape.setRotation(angle);
+			shapeManager.updateSelectedShape(shape);
+		}
+		
 		if(dragging){
 			
-			int d_deltaX = (e.getX() - d_dragStartX);
-			int d_deltaY = (e.getY() - d_dragStartY);
+			int d_deltaX = (end.x - d_dragStartX);
+			int d_deltaY = (end.y - d_dragStartY);
 			
-			d_dragStartX = e.getX();
-			d_dragStartY = e.getY();
+			d_dragStartX = end.x;
+			d_dragStartY = end.y;
 
 			Shape shape = shapeManager.getSelectedShape();
 			String shapeType = shape.getClass().getName();
@@ -209,8 +228,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 		
 		if (resizing) {	
 			//System.out.printf("resizing: %d %d\n", e.getX(),e.getY());
-
-			Point end = new Point(e.getX(),e.getY());
 			
 			if(shapeManager.getCurrentMode() == Mode.SELECT){
 				Shape shape = shapeManager.getSelectedShape();
@@ -275,6 +292,12 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// no need
+	}
+	
+	public double getRotateAngle(Point a, Point b){
+		double x = a.x - b.x;
+		double y = a.y - b.y;
+		return Math.atan2(y, x);
 	}
 	
 	public boolean containsPoint(Point clickedPoint, Point p) {
