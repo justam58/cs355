@@ -67,6 +67,12 @@ public class ShapeManager {
 	public void setCurrentColor(Color currentColor) {
 		this.currentColor = currentColor;
 		Shape shape;
+		if(selectedIndex != -1){
+			shape = getSelectedShape();
+			shape.setColor(currentColor);
+			updateSelectedShape(shape);
+			GUIFunctions.refresh();
+		}
 		try{
 			shape = getCurrentShape();
 		}

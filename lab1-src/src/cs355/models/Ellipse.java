@@ -1,6 +1,7 @@
 package cs355.models;
 
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Ellipse extends Shape{
@@ -17,6 +18,14 @@ public class Ellipse extends Shape{
 	}
 
 	public void setEndPoint(Point end){
+//		try{
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(-rotation, center.x, center.y);
+//			at.translate(end.x, end.y);
+//			end.x = (int) at.getTranslateX();
+//			end.y = (int) at.getTranslateY();
+//		}
+//		catch(NullPointerException e){}
 		height = Math.abs(start.y-end.y);
 		width = Math.abs(start.x-end.x);
 		upperLeftCorner = new Point(Math.min(start.x,end.x),Math.min(start.y,end.y));
@@ -25,6 +34,7 @@ public class Ellipse extends Shape{
 	
 	public void setStart(Point s){
 		int index = indexOf(s);
+		System.out.printf("index is %d\n",index);
 		if(index == 0){
 			start = getResizePoints().get(2);
 		}
@@ -37,6 +47,11 @@ public class Ellipse extends Shape{
 		else{
 			start = getResizePoints().get(1);
 		}
+//		AffineTransform at = new AffineTransform();
+//		at.translate(start.x, start.y);
+//		at.rotate(-rotation, center.x, center.y);
+//		start.x = (int) at.getTranslateX();
+//		start.y = (int) at.getTranslateY();
 	}
 	
 	public Point getUpperLeftCorner() {
@@ -52,6 +67,11 @@ public class Ellipse extends Shape{
 	}
 	
 	private int indexOf(Point p){
+//		AffineTransform at = new AffineTransform();
+//		at.rotate(-rotation, center.x, center.y);
+//		at.translate(p.x, p.y);
+//		p.x = (int) at.getTranslateX();
+//		p.y = (int) at.getTranslateY();
 		ArrayList<Point> points = getResizePoints();
 		int result = -1;
 		for(int i = 0; i < points.size(); i++){
@@ -66,14 +86,12 @@ public class Ellipse extends Shape{
 
 	@Override
 	public boolean contains(Point p) {
-		System.out.println(Math.toDegrees(rotation));
-		Point pp = new Point(p);
-		pp.x -= center.x;
-		pp.y -= center.y;
-		pp.x = (int)(Math.cos(rotation)*pp.x-Math.sin(rotation)*pp.y);
-		pp.y = (int)(Math.sin(rotation)*pp.x+Math.cos(rotation)*pp.y);
-		System.out.println(pp);
-		return (Math.pow(pp.x/(width/2.0), 2) + Math.pow(pp.y/(height/2.0), 2) <= 1);
+		AffineTransform at = new AffineTransform();
+		at.rotate(-rotation, center.x, center.y);
+		at.translate(p.x, p.y);
+		double x = at.getTranslateX();
+		double y = at.getTranslateY();
+		return (Math.pow((x-center.x)/(width/2.0), 2) + Math.pow((y-center.y)/(height/2.0), 2) <= 1);
 	}
 
 	@Override
