@@ -28,10 +28,10 @@ public class MyViewRefresher implements ViewRefresher{
 	
 	private void drawSquare(Graphics2D g2d, Square shape){
 		double size = shape.getSize();
-		double centerX = shape.getCenter().getX();
-		double centerY = shape.getCenter().getY();
 		g2d.setTransform(tfm.obejctToView(shape));
-		g2d.fillRect((int)(centerX-size), (int)(centerY-size), (int)size, (int)size);
+		System.out.println(tfm.obejctToView(shape));
+		g2d.fillRect(0, 0, (int)size, (int)size);
+		System.out.println("---------------------DONE---------------------");
 	}
 
 }

@@ -27,8 +27,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.printf("%d, %d",e.getX(),e.getY());
 	}
 
 	@Override

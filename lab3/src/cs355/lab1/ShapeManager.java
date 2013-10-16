@@ -29,7 +29,7 @@ public class ShapeManager {
 		
 		Square test = new Square(currentColor);
 		test.setSize(50);
-		test.setCenter(new Point2D.Double(100,200));
+		test.setCenter(new Point2D.Double(256,256));
 		shapes.add(test);
 	}
 
