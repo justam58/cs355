@@ -54,12 +54,14 @@ public class MyController implements CS355Controller{
 	@Override
 	public void zoomInButtonHit() {
 		view.zoomIn();
+		updateScrollBar();
 		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void zoomOutButtonHit() {
 		view.zoomOut();
+		updateScrollBar();
 		GUIFunctions.refresh();
 	}
 
@@ -75,4 +77,9 @@ public class MyController implements CS355Controller{
 		GUIFunctions.refresh();
 	}
 
+	private void updateScrollBar(){
+		int value = (int)(512/view.getScale());
+		GUIFunctions.setHScrollBarKnob(value);
+		GUIFunctions.setVScrollBarKnob(value);
+	}
 }

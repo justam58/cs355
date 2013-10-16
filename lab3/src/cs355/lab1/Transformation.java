@@ -46,13 +46,13 @@ public class Transformation {
     	double cy = s.getCenter().getY();
     	AffineTransform r = new AffineTransform(cos(tt),sin(tt),-sin(tt),cos(tt),0,0);
     	AffineTransform t = new AffineTransform(1,0,0,1,cx,cy);
-    	System.out.println("r");
-    	System.out.println(r);
-    	System.out.println("t");
-    	System.out.println(t);
+//    	System.out.println("r");
+//    	System.out.println(r);
+//    	System.out.println("t");
+//    	System.out.println(t);
     	t.concatenate(r);
-    	System.out.println("result");
-    	System.out.println(t);
+//    	System.out.println("result");
+//    	System.out.println(t);
     	return t;
     }
     

@@ -169,7 +169,7 @@ class CS355Frame extends javax.swing.JFrame {
         });
 
         jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
-        jScrollBar2.setValue(1);
+        jScrollBar2.setValue(0);
         jScrollBar2.setVisibleAmount(99);
         jScrollBar2.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
             public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {

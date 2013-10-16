@@ -28,9 +28,18 @@ public class ShapeManager {
 		currentColor = Color.WHITE;
 		
 		Square test = new Square(currentColor);
-		test.setSize(50);
+		test.setSize(200);
 		test.setCenter(new Point2D.Double(256,256));
+		test.setRotation(Math.PI/4);
+		Square test1 = new Square(currentColor);
+		test1.setSize(50);
+		test1.setCenter(new Point2D.Double(0,0));
+		Square test2 = new Square(currentColor);
+		test2.setSize(48);
+		test2.setCenter(new Point2D.Double(2000,2000));
 		shapes.add(test);
+		shapes.add(test2);
+		shapes.add(test1);
 	}
 
 	public Color getCurrentColor() {

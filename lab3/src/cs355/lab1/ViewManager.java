@@ -2,6 +2,8 @@ package cs355.lab1;
 
 import java.awt.geom.Point2D;
 
+import cs355.GUIFunctions;
+
 public class ViewManager {
 	
 	// singleton
