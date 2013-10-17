@@ -5,6 +5,7 @@
 package cs355;
 
 import static cs355.CS355SScrollbarAttrConsts.H_SCROLL_BAR;
+import static cs355.CS355SScrollbarAttrConsts.KNOB;
 import static cs355.CS355SScrollbarAttrConsts.MIN;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -169,7 +170,7 @@ class CS355Frame extends javax.swing.JFrame {
         });
 
         jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
-        jScrollBar2.setValue(0);
+        jScrollBar2.setValue(1);
         jScrollBar2.setVisibleAmount(99);
         jScrollBar2.addAdjustmentListener(new java.awt.event.AdjustmentListener() {
             public void adjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {
@@ -287,11 +288,11 @@ class CS355Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        controller.zoomInButtonHit();
+        controller.zoomOutButtonHit();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        controller.zoomOutButtonHit();
+        controller.zoomInButtonHit();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jScrollBar2AdjustmentValueChanged(java.awt.event.AdjustmentEvent evt) {//GEN-FIRST:event_jScrollBar2AdjustmentValueChanged
@@ -382,6 +383,9 @@ class CS355Frame extends javax.swing.JFrame {
                 break;
             case KNOB:
                 scrollbarToChange.setVisibleAmount(number);
+                break;
+            case POSIT:
+                scrollbarToChange.setValue(number);
                 break;
             default:
                 throw new IllegalArgumentException("Bad Attribute type!");

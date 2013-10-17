@@ -1,11 +1,10 @@
 package cs355.lab1;
 
 import java.awt.Color;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import cs355.GUIFunctions;
 import cs355.models.Shape;
-import cs355.models.Square;
 
 public class ShapeManager {
 	
@@ -19,27 +18,41 @@ public class ShapeManager {
 	// different shapes in enum
 	public enum Mode { TRIANGLE, SQUARE, RECTANGLE, CIRCLE, ELLIPSE, LINE, SELECT }
 	
-	private Color currentColor;
-	private Mode currentMode;
-	private ArrayList<Shape> shapes;
+	// current shape and color
+	private Color currentColor = Color.WHITE;
+	private Mode currentMode = Mode.TRIANGLE;
+	private int totalIndex = 0;
+	private int selectedIndex = -1;
+	
+	// start drawing triangle or not
+		private boolean triangleStarted = false;
+	    
+	// all of the shapes that have been drawn
+	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
-	public ShapeManager() {
-		shapes = new ArrayList<Shape>();
-		currentColor = Color.WHITE;
+	public void updateDrawingShape(Shape shape){
+		shapes.set(totalIndex,shape);
+		GUIFunctions.refresh();
+	}
+	
+	public void updateSelectedShape(Shape shape){
+		shapes.set(selectedIndex,shape);
+		GUIFunctions.refresh();
+	}
 		
-		Square test = new Square(currentColor);
-		test.setSize(200);
-		test.setCenter(new Point2D.Double(256,256));
-		test.setRotation(Math.PI/4);
-		Square test1 = new Square(currentColor);
-		test1.setSize(50);
-		test1.setCenter(new Point2D.Double(0,0));
-		Square test2 = new Square(currentColor);
-		test2.setSize(48);
-		test2.setCenter(new Point2D.Double(2000,2000));
-		shapes.add(test);
-		shapes.add(test2);
-		shapes.add(test1);
+	public void add(Shape shape){
+		shape.setColor(currentColor);
+		shapes.add(totalIndex,shape);
+		if(currentMode == Mode.TRIANGLE){
+			setTriangleStarted(true);
+		}
+	}
+	
+	public void moveOn(){
+		System.out.println("move on");
+		totalIndex++;
+		setTriangleStarted(false);
+		GUIFunctions.refresh();
 	}
 
 	public Color getCurrentColor() {
@@ -48,6 +61,20 @@ public class ShapeManager {
 
 	public void setCurrentColor(Color currentColor) {
 		this.currentColor = currentColor;
+		Shape shape;
+		if(selectedIndex != -1){
+			shape = getSelectedShape();
+			shape.setColor(currentColor);
+			updateSelectedShape(shape);
+			GUIFunctions.refresh();
+		}
+		try{
+			shape = getCurrentShape();
+		}
+		catch(IndexOutOfBoundsException e){
+			return;
+		}
+		shape.setColor(currentColor);
 	}
 
 	public Mode getCurrentMode() {
@@ -56,14 +83,35 @@ public class ShapeManager {
 
 	public void setCurrentMode(Mode currentMode) {
 		this.currentMode = currentMode;
+		setTriangleStarted(false);
+		if(currentMode != Mode.SELECT){
+			setSelectedIndex(-1);
+		}
 	}
 
-	public ArrayList<Shape> getShapes() {
-		return shapes;
+	public Shape getCurrentShape() {
+		return shapes.get(totalIndex);
 	}
 
-	public void setShapes(ArrayList<Shape> shapes) {
-		this.shapes = shapes;
+	public boolean isTriangleStarted() {
+		return triangleStarted;
+	}
+
+	public void setTriangleStarted(boolean triangleStarted) {
+		this.triangleStarted = triangleStarted;
+	}
+
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
+
+	public void setSelectedIndex(int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+		GUIFunctions.refresh();
+	}
+	
+	public Shape getSelectedShape(){
+		return shapes.get(selectedIndex);
 	}
 	
 }
