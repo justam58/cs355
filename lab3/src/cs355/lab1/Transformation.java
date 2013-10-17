@@ -28,39 +28,39 @@ public class Transformation {
     	return a;
     }
     
-    public Point2D viewToObejctPoint(Point2D p, Shape s){
-    	Point2D r = new Point2D.Double();
-    	viewToObejct(s).transform(p, r);
-		return r;
-    }
-    
-    public Point2D obejctToViewPoint(Point2D p, Shape s){
-    	Point2D r = new Point2D.Double();
-    	obejctToView(s).transform(p, r);
-		return r;
-    }
-    
-    private AffineTransform objectToWorld(Shape s){
+    public AffineTransform objectToWorld(Shape s){
     	double tt = s.getRotation();
+    	double ox = s.getOrigin().getX();
+    	double oy = s.getOrigin().getY();
     	double cx = s.getCenter().getX();
     	double cy = s.getCenter().getY();
+    	AffineTransform r1 = new AffineTransform(1,0,0,1,-cx,-cy);
     	AffineTransform r = new AffineTransform(cos(tt),sin(tt),-sin(tt),cos(tt),0,0);
-    	AffineTransform t = new AffineTransform(1,0,0,1,cx,cy);
+    	AffineTransform r2 = new AffineTransform(1,0,0,1,cx,cy);
+    	AffineTransform t = new AffineTransform(1,0,0,1,ox,oy);
+    	t.concatenate(r2);
     	t.concatenate(r);
+    	t.concatenate(r1);
     	return t;
     }
     
-    private AffineTransform worldToObject(Shape s){
+    public AffineTransform worldToObject(Shape s){
     	double tt = s.getRotation();
+    	double ox = s.getOrigin().getX();
+    	double oy = s.getOrigin().getY();
     	double cx = s.getCenter().getX();
     	double cy = s.getCenter().getY();
-    	AffineTransform t = new AffineTransform(1,0,0,1,-cx,-cy);
+    	AffineTransform t = new AffineTransform(1,0,0,1,-ox,-oy);
+    	AffineTransform r1 = new AffineTransform(1,0,0,1,-cx,-cy);
     	AffineTransform r = new AffineTransform(cos(tt),-sin(tt),sin(tt),cos(tt),0,0);
-    	r.concatenate(t);
-		return r;
+    	AffineTransform r2 = new AffineTransform(1,0,0,1,cx,cy);
+    	r2.concatenate(r);
+    	r2.concatenate(r1);
+    	r2.concatenate(t);
+		return r2;
     }
     
-    private AffineTransform viewToWorld(){
+    public AffineTransform viewToWorld(){
     	double f = view.getScale();
     	double px = view.gethScroll();
     	double py = view.getvScroll();
@@ -70,7 +70,7 @@ public class Transformation {
 		return t;
     }
     
-    private AffineTransform worldToView(){
+    public AffineTransform worldToView(){
     	double f = view.getScale();
     	double px = view.gethScroll();
     	double py = view.getvScroll();

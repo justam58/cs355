@@ -2,7 +2,6 @@ package cs355.models;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public abstract class Shape {
@@ -43,8 +42,8 @@ public abstract class Shape {
 	
 	public abstract void calculateCenter();
 	
-	public abstract ArrayList<Point2D> getResizePoints();
+	public abstract ArrayList<Point> getResizePoints();
 	
-	public abstract Point2D getRotatePoint();
+	public abstract Point getRotatePoint();
 	
 }
