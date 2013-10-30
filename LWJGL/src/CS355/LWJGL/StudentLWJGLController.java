@@ -42,8 +42,7 @@ import static org.lwjgl.opengl.GL11.glClearDepth;
  *
  * @author Brennan Smith
  */
-public class StudentLWJGLController implements CS355LWJGLController 
-{
+public class StudentLWJGLController implements CS355LWJGLController {
 	private WireFrame model = new HouseModel();
 	
 	//camera
@@ -56,26 +55,23 @@ public class StudentLWJGLController implements CS355LWJGLController
 	//This method is called to "resize" the viewport to match the screen.
 	//When you first start, have it be in perspective mode.
 	@Override
-	public void resizeGL() 
-	{
+	public void resizeGL() {
 		glViewport(0,0,640,480);
 		
 		// Set the aspect ratio of the clipping volume to match the viewport
-		glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
-		glLoadIdentity();             // Reset
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
 		// Enable perspective projection with fovy, aspect, zNear and zFar
 		gluPerspective(50.0f, aspect, 0.1f, 100f);
 	}
 
     @Override
-    public void update() 
-    {
+    public void update() {
         // no need for this lab
     }
 
     @Override
-    public void updateKeyboard()
-    {
+    public void updateKeyboard() {
         if(Keyboard.isKeyDown(Keyboard.KEY_A)) cameraX++;
         else if(Keyboard.isKeyDown(Keyboard.KEY_D)) cameraX--;
         else if(Keyboard.isKeyDown(Keyboard.KEY_W)) cameraZ++;
@@ -84,40 +80,34 @@ public class StudentLWJGLController implements CS355LWJGLController
         else if(Keyboard.isKeyDown(Keyboard.KEY_E)) cameraDirection++;
         else if(Keyboard.isKeyDown(Keyboard.KEY_R)) cameraY--;
         else if(Keyboard.isKeyDown(Keyboard.KEY_F)) cameraY++;
-        else if(Keyboard.isKeyDown(Keyboard.KEY_O)) 
-        {
+        else if(Keyboard.isKeyDown(Keyboard.KEY_O)) {
 			// Set the aspect ratio of the clipping volume to match the viewport
-			glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
-			glLoadIdentity();             // Reset
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
 		    // aspect >= 1, set the height from -1 to 1, with larger width
 		    glOrtho(-10.0 * aspect, 10.0 * aspect, -10.0, 10.0, 0.1, 100);
         }
-        else if(Keyboard.isKeyDown(Keyboard.KEY_P)) 
-        {
+        else if(Keyboard.isKeyDown(Keyboard.KEY_P)) {
     		// Set the aspect ratio of the clipping volume to match the viewport
-    		glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
-    		glLoadIdentity();             // Reset
+    		glMatrixMode(GL_PROJECTION);
+    		glLoadIdentity();
     		// Enable perspective projection with fovy, aspect, zNear and zFar
     		gluPerspective(50.0f, aspect, 0.1f, 100f);
         }
     }
 
-    //This method is the one that actually draws to the screen.
     @Override
-    public void render() 
-    {
-        //This clears the screen.
+    public void render() {
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearDepth(1.0f); // Set background depth to farthest
         
-        glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
-	    glLoadIdentity();                  // Reset the model-view matrix
-	    glTranslatef(cameraX, cameraY, cameraZ);  // Move left and into the screen
+        glMatrixMode(GL_MODELVIEW);
+	    glLoadIdentity();
+	    glTranslatef(cameraX, cameraY, cameraZ);
 	    glRotatef(cameraDirection,0.0f,1.0f,0.0f);
 	    
         Iterator<Line3D> linesItr = model.getLines();
         glBegin(GL_LINES);
-        while(linesItr.hasNext()){
+        while(linesItr.hasNext()) {
         	Line3D line = linesItr.next();
         	glColor3f(1.0f, 1.0f, 1.0f);
         	glVertex3d(line.start.x,line.start.y,line.start.z);
