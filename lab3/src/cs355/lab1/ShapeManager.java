@@ -1,10 +1,12 @@
 package cs355.lab1;
 
 import java.awt.Color;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import cs355.GUIFunctions;
 import cs355.models.Shape;
+import cs355.models.Square;
 
 public class ShapeManager {
 	
@@ -25,7 +27,7 @@ public class ShapeManager {
 	private int selectedIndex = -1;
 	
 	// start drawing triangle or not
-		private boolean triangleStarted = false;
+	private boolean triangleStarted = false;
 	    
 	// all of the shapes that have been drawn
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -112,6 +114,10 @@ public class ShapeManager {
 	
 	public Shape getSelectedShape(){
 		return shapes.get(selectedIndex);
+	}
+
+	public ArrayList<Shape> getShapes() {
+		return shapes;
 	}
 	
 }

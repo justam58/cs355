@@ -5,6 +5,7 @@
 package cs355.lab1;
 
 import cs355.GUIFunctions;
+
 import java.awt.Color;
 
 /**

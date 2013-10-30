@@ -1,7 +1,6 @@
 package cs355.models;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -13,12 +12,16 @@ public abstract class Shape {
 	private Transformation tfm = Transformation.getInstance(); 
 	
 	private Color color;
-	private Point2D center;
+	protected Point2D origin;
 	private double rotation;
+	
+	public Shape() {
+		this.rotation = 0;
+	}
 	
 	public Shape(Color color) {
 		this.color = color;
-		this.center = new Point2D.Double(0,0);
+		this.origin = new Point2D.Double(0,0);
 		this.rotation = 0;
 	}
 	
@@ -28,11 +31,11 @@ public abstract class Shape {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public Point2D getCenter() {
-		return center;
+	public Point2D getOrigin() {
+		return origin;
 	}
-	public void setCenter(Point2D center) {
-		this.center = center;
+	public void setOrigin(Point2D origin) {
+		this.origin = origin;
 	}
 	public double getRotation() {
 		return rotation;
@@ -41,12 +44,14 @@ public abstract class Shape {
 		this.rotation = rotation;
 	}
 	
-	public abstract ArrayList<Point> getResizePoints();
+	public abstract ArrayList<Point2D> getResizePoints();
 	
-	public abstract Point getRotatePoint();
+	public abstract Point2D getCenter();
 	
-	public abstract boolean contains(Point p);
+	public abstract Point2D getRotatePoint();
 	
-	public abstract void move(int d_x, int d_y);
+	public abstract boolean contains(Point2D p);
+	
+	public abstract void move(double d_x, double d_y);
 	
 }
