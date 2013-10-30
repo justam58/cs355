@@ -1,16 +1,6 @@
 package CS355.LWJGL;
 
-
-//You might notice a lot of imports here.
-//You are probably wondering why I didn't just import org.lwjgl.opengl.GL11.*
-//Well, I did it as a hint to you.
-//OpenGL has a lot of commands, and it can be kind of intimidating.
-//This is a list of all the commands I used when I implemented my project.
-//Therefore, if a command appears in this list, you probably need it.
-//If it doesn't appear in this list, you probably don't.
-//Of course, your milage may vary. Don't feel restricted by this list of imports.
 import java.util.Iterator;
-
 import org.lwjgl.input.Keyboard;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
@@ -31,17 +21,6 @@ import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
-
-import static org.lwjgl.util.glu.GLU.gluLookAt;
-import static org.lwjgl.opengl.GL11.glVertex3f;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-import static org.lwjgl.util.glu.GLU.gluOrtho2D;
-import static org.lwjgl.opengl.GL11.glClearDepth;
-/**
- *
- * @author Brennan Smith
- */
 public class StudentLWJGLController implements CS355LWJGLController {
 	private WireFrame model = new HouseModel();
 	
@@ -52,8 +31,6 @@ public class StudentLWJGLController implements CS355LWJGLController {
 	private float cameraDirection = 0;
 	private float aspect = 640 / 480;
 
-	//This method is called to "resize" the viewport to match the screen.
-	//When you first start, have it be in perspective mode.
 	@Override
 	public void resizeGL() {
 		glViewport(0,0,640,480);
@@ -115,5 +92,4 @@ public class StudentLWJGLController implements CS355LWJGLController {
         }
         glEnd();
     }
-    
 }
