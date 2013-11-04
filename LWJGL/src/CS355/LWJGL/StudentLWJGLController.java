@@ -79,8 +79,8 @@ public class StudentLWJGLController implements CS355LWJGLController {
         
         glMatrixMode(GL_MODELVIEW);
 	    glLoadIdentity();
-	    glTranslatef(cameraX, cameraY, cameraZ);
 	    glRotatef(cameraDirection,0.0f,1.0f,0.0f);
+	    glTranslatef(cameraX, cameraY, cameraZ);
 	    
         Iterator<Line3D> linesItr = model.getLines();
         glBegin(GL_LINES);
