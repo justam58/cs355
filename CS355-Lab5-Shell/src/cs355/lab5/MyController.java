@@ -9,7 +9,8 @@ import cs355.lab5.ShapeManager.Mode;
 public class MyController implements CS355Controller{
 	
 	private ShapeManager shapes = ShapeManager.getInstance();
-	private ViewManager view = ViewManager.getInstance();
+	private ViewState view = ViewState.getInstance();
+	private ThreeDState threeD = ThreeDState.getInstance();
 
 	@Override
 	public void colorButtonHit(Color c) {
@@ -74,14 +75,36 @@ public class MyController implements CS355Controller{
 
 	@Override
 	public void toggle3DModelDisplay() {
-		// TODO Auto-generated method stub
-		
+		threeD.toggle();
 	}
 
 	@Override
 	public void keyPressed(Iterator<Integer> iterator) {
-		// TODO Auto-generated method stub
-		
+		while(iterator.hasNext()){
+			Integer key = iterator.next();
+			switch(key){
+				case 65 :		threeD.setCameraX(threeD.getCameraX()+1);
+								break;
+				case 68 :		threeD.setCameraX(threeD.getCameraX()-1);
+								break;
+				case 87 :		threeD.setCameraZ(threeD.getCameraZ()+1);
+								break;
+				case 83 :		threeD.setCameraZ(threeD.getCameraZ()-1);
+								break;
+				case 81 :		threeD.setCameraDirection(threeD.getCameraDirection()-1);
+								break;
+				case 69 :		threeD.setCameraDirection(threeD.getCameraDirection()+1);
+								break;
+				case 82 :		threeD.setCameraY(threeD.getCameraY()-1);
+								break;
+				case 70 :		threeD.setCameraY(threeD.getCameraY()+1);
+								break;
+				case 72 :		threeD.reset();
+								break;		
+				default:		System.out.printf("Invalid key\n");
+            					break;
+			}
+		}
 	}
 
 }

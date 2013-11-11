@@ -16,7 +16,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener{
 	
 	private ShapeManager shapeManager = ShapeManager.getInstance();
 	private Transformation tfm = Transformation.getInstance(); 
-	private ViewManager view = ViewManager.getInstance();
+	private ViewState view = ViewState.getInstance();
 	
 	private boolean resizing;
 	private boolean dragging;

@@ -4,15 +4,21 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import cs355.Line3D;
+import cs355.Point3D;
 import cs355.ViewRefresher;
+import cs355.WireFrame;
 import cs355.model.*;
 
 public class MyViewRefresher implements ViewRefresher{
 
 	private ShapeManager shapeManager = ShapeManager.getInstance();
 	private Transformation tfm = Transformation.getInstance();
-	private ViewManager view = ViewManager.getInstance();
+	private ViewState view = ViewState.getInstance();
+	private ThreeDState threeD = ThreeDState.getInstance();
+	private ThreeDTest tdt = ThreeDTest.getInstance();
 	private double stroke;
 	
 	@Override
@@ -24,22 +30,38 @@ public class MyViewRefresher implements ViewRefresher{
 			g2d.setColor(shapes.get(i).getColor());
 			boolean selected = (i==index);
 			switch(shapes.get(i).getClass().getName()){
-			case "cs355.models.Line" :			drawLine(g2d,(Line) shapes.get(i),selected);
-												break;
-			case "cs355.models.Square" :		drawSquare(g2d,(Square) shapes.get(i),selected);
-												break;
-			case "cs355.models.Rectangle" :		drawRectangle(g2d,(Rectangle) shapes.get(i),selected);
-												break;
-			case "cs355.models.Circle" :		drawCircle(g2d,(Circle) shapes.get(i),selected);
-												break;
-			case "cs355.models.Ellipse" :		drawEllipse(g2d,(Ellipse) shapes.get(i),selected);
-												break;
-			case "cs355.models.Triangle" :		drawTrianagle(g2d,(Triangle) shapes.get(i),selected);
-												break;		
+				case "cs355.models.Line" :			drawLine(g2d,(Line) shapes.get(i),selected);
+													break;
+				case "cs355.models.Square" :		drawSquare(g2d,(Square) shapes.get(i),selected);
+													break;
+				case "cs355.models.Rectangle" :		drawRectangle(g2d,(Rectangle) shapes.get(i),selected);
+													break;
+				case "cs355.models.Circle" :		drawCircle(g2d,(Circle) shapes.get(i),selected);
+													break;
+				case "cs355.models.Ellipse" :		drawEllipse(g2d,(Ellipse) shapes.get(i),selected);
+													break;
+				case "cs355.models.Triangle" :		drawTrianagle(g2d,(Triangle) shapes.get(i),selected);
+													break;		
 				default:							System.out.printf("Invalid Shape : %s\n" ,shapes.get(i).getClass().getName());
                 									break;
 			}
 		}
+//		if(threeD.isOn()){
+//			g2d.setColor(Color.WHITE);
+//			WireFrame model = threeD.getModel();
+//			Iterator<Line3D> linesItr = model.getLines();
+//	        while(linesItr.hasNext()) {
+//	        	Line3D line = linesItr.next();
+//	        	Point3D start = new cs355.Point3D(line.start.x,line.start.y,line.start.z);
+//	        	Point3D end = new cs355.Point3D(line.end.x,line.end.y,line.end.z);
+//	    		Point2D a = tdt.test(start);
+//	    		Point2D b = tdt.test(end);
+//	        	if(a != null && b != null){
+//	        		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
+//	        	}
+//	        }
+//		}
+		Point2D a = tdt.test(new Point3D(10,10,10));
 	}
 	
 	private void drawTrianagle(Graphics2D g2d, Triangle shape, boolean selected) {

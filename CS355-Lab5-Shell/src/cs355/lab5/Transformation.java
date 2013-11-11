@@ -13,7 +13,7 @@ public class Transformation {
         return instance;
     }
     
-    private ViewManager view = ViewManager.getInstance();
+    private ViewState view = ViewState.getInstance();
     
     public AffineTransform viewToObejct(Shape s){
     	AffineTransform a = worldToObject(s);

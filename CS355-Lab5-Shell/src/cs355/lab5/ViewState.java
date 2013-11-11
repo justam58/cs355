@@ -4,12 +4,12 @@ import java.awt.geom.Point2D;
 
 import cs355.GUIFunctions;
 
-public class ViewManager {
+public class ViewState {
 	
 	// singleton
-    private static ViewManager instance = new ViewManager();
+    private static ViewState instance = new ViewState();
 
-    public static ViewManager getInstance() {
+    public static ViewState getInstance() {
         return instance;
     }
     
@@ -17,7 +17,7 @@ public class ViewManager {
     private int vScroll;
     private int hScroll;
     
-    public ViewManager(){
+    public ViewState(){
     	this.scale = 1;
     	this.vScroll = 0;
     	this.vScroll = 0;
