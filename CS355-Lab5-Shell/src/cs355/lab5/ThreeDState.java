@@ -16,22 +16,21 @@ public class ThreeDState {
     private WireFrame model = new HouseModel();
     
 	//camera
-	private float cameraX = 0;
-	private float cameraY = -5;
-	private float cameraZ = -20;
-	private float cameraDirection = 0;
-	private float aspect = 640 / 480;
+	private float cameraX;
+	private float cameraY;
+	private float cameraZ;
+	private float cameraDirection;
     
     public ThreeDState(){
-    	on = false;
+    	on = true;
     	reset();
     }
     
 	public void reset() {
 		cameraX = 0;
-		cameraY = -5;
-		cameraZ = 100;
-		cameraDirection = 0;
+		cameraY = 5;
+		cameraZ = 20;
+		cameraDirection = 180;
 	}
 
 	public void toggle() {
@@ -72,14 +71,6 @@ public class ThreeDState {
 
 	public void setCameraDirection(float cameraDirection) {
 		this.cameraDirection = cameraDirection;
-	}
-
-	public float getAspect() {
-		return aspect;
-	}
-
-	public void setAspect(float aspect) {
-		this.aspect = aspect;
 	}
 
 	public WireFrame getModel() {

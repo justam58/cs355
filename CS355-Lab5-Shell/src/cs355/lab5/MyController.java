@@ -76,12 +76,14 @@ public class MyController implements CS355Controller{
 	@Override
 	public void toggle3DModelDisplay() {
 		threeD.toggle();
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void keyPressed(Iterator<Integer> iterator) {
 		while(iterator.hasNext()){
 			Integer key = iterator.next();
+			char c = Character.toChars(key)[0];
 			switch(key){
 				case 65 :		threeD.setCameraX(threeD.getCameraX()+1);
 								break;
@@ -104,6 +106,7 @@ public class MyController implements CS355Controller{
 				default:		System.out.printf("Invalid key\n");
             					break;
 			}
+			GUIFunctions.refresh();
 		}
 	}
 

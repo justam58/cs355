@@ -46,22 +46,23 @@ public class MyViewRefresher implements ViewRefresher{
                 									break;
 			}
 		}
-//		if(threeD.isOn()){
-//			g2d.setColor(Color.WHITE);
-//			WireFrame model = threeD.getModel();
-//			Iterator<Line3D> linesItr = model.getLines();
-//	        while(linesItr.hasNext()) {
-//	        	Line3D line = linesItr.next();
-//	        	Point3D start = new cs355.Point3D(line.start.x,line.start.y,line.start.z);
-//	        	Point3D end = new cs355.Point3D(line.end.x,line.end.y,line.end.z);
-//	    		Point2D a = tdt.test(start);
-//	    		Point2D b = tdt.test(end);
-//	        	if(a != null && b != null){
-//	        		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
-//	        	}
-//	        }
-//		}
-		Point2D a = tdt.test(new Point3D(10,10,10));
+		if(threeD.isOn()){
+			System.out.println("draw 3D");
+			g2d.setColor(Color.WHITE);
+			WireFrame model = threeD.getModel();
+			Iterator<Line3D> linesItr = model.getLines();
+	        while(linesItr.hasNext()) {
+	        	Line3D line = linesItr.next();
+	        	Point3D start = new cs355.Point3D(line.start.x,line.start.y,line.start.z);
+	        	Point3D end = new cs355.Point3D(line.end.x,line.end.y,line.end.z);
+	    		Point2D a = tdt.test(start);
+	    		Point2D b = tdt.test(end);
+	        	if(a != null && b != null){
+	        		System.out.println("draw line");
+	        		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
+	        	}
+	        }
+		}
 	}
 	
 	private void drawTrianagle(Graphics2D g2d, Triangle shape, boolean selected) {
