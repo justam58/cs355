@@ -85,13 +85,17 @@ public class MyController implements CS355Controller{
 			Integer key = iterator.next();
 			char c = Character.toChars(key)[0];
 			switch(c){
-				case 'A' :		threeD.setCameraX(threeD.getCameraX()+1);
+				case 'A' :		threeD.setCameraX(threeD.getCameraX()-Math.cos(Math.toRadians(threeD.getCameraDirection())));
+								threeD.setCameraZ(threeD.getCameraZ()-Math.sin(Math.toRadians(threeD.getCameraDirection())));
 								break;
-				case 'D' :		threeD.setCameraX(threeD.getCameraX()-1);
+				case 'D' :		threeD.setCameraX(threeD.getCameraX()+Math.cos(Math.toRadians(threeD.getCameraDirection())));
+								threeD.setCameraZ(threeD.getCameraZ()+Math.sin(Math.toRadians(threeD.getCameraDirection())));
 								break;
-				case 'W' :		threeD.setCameraZ(threeD.getCameraZ()-1);
+				case 'W' :		threeD.setCameraX(threeD.getCameraX()-Math.sin(Math.toRadians(threeD.getCameraDirection())));
+								threeD.setCameraZ(threeD.getCameraZ()+Math.cos(Math.toRadians(threeD.getCameraDirection())));
 								break;
-				case 'S' :		threeD.setCameraZ(threeD.getCameraZ()+1);
+				case 'S' :		threeD.setCameraX(threeD.getCameraX()+Math.sin(Math.toRadians(threeD.getCameraDirection())));
+								threeD.setCameraZ(threeD.getCameraZ()-Math.cos(Math.toRadians(threeD.getCameraDirection())));
 								break;
 				case 'Q' :		threeD.setCameraDirection(threeD.getCameraDirection()+1);
 								break;
@@ -107,6 +111,9 @@ public class MyController implements CS355Controller{
             					break;
 			}
 			GUIFunctions.refresh();
+			System.out.println(threeD.getCameraDirection());
+			System.out.printf("cos %f\n",Math.cos(Math.toRadians(threeD.getCameraDirection())));
+			System.out.printf("sin %f\n",Math.sin(Math.toRadians(threeD.getCameraDirection())));
 //			System.out.printf("%d %d %d\n",(int)threeD.getCameraX(),(int)threeD.getCameraY(),(int)threeD.getCameraZ());
 		}
 	}
