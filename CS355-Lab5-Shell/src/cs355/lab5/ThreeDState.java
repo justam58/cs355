@@ -19,7 +19,7 @@ public class ThreeDState {
 	private int cameraDirection;
     
     public ThreeDState(){
-    	on = true;
+    	on = false;
     	reset();
     }
     

@@ -111,9 +111,9 @@ public class MyController implements CS355Controller{
             					break;
 			}
 			GUIFunctions.refresh();
-			System.out.println(threeD.getCameraDirection());
-			System.out.printf("cos %f\n",Math.cos(Math.toRadians(threeD.getCameraDirection())));
-			System.out.printf("sin %f\n",Math.sin(Math.toRadians(threeD.getCameraDirection())));
+//			System.out.println(threeD.getCameraDirection());
+//			System.out.printf("cos %f\n",Math.cos(Math.toRadians(threeD.getCameraDirection())));
+//			System.out.printf("sin %f\n",Math.sin(Math.toRadians(threeD.getCameraDirection())));
 //			System.out.printf("%d %d %d\n",(int)threeD.getCameraX(),(int)threeD.getCameraY(),(int)threeD.getCameraZ());
 		}
 	}

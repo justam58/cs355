@@ -20,6 +20,7 @@ public class ThreeDTest {
     private double zoom = Math.pow(3,0.5);
     private double f = 1000;
     private double n = 1;
+    private double size = 2048;
     
 
 	public Line2D test(Point3D p1, Point3D p2) {
@@ -53,8 +54,8 @@ public class ThreeDTest {
 	
 	private Point2D map(Vector v){
 		double[] result = v.getV();
-		double x = (result[0]+1)*256;
-		double y = (-result[1]+1)*256;
+		double x = (result[0]+1)*size/2;
+		double y = (-result[1]+1)*size/2;
 		return new Point2D.Double(x,y);
 	}
 	
@@ -140,11 +141,7 @@ public class ThreeDTest {
 		public double[] getV() {
 			return v;
 		}
-		@Override
-		public String toString() {
-			return "Vector [v=" + Arrays.toString(v) + "]";
-		}
-		
+
 	}
 
 }
