@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import cs355.lab5.ShapeManager.Mode;
-import cs355.model.*;
+import cs355.models.*;
 
 
 public class MyMouseListener implements MouseListener, MouseMotionListener{

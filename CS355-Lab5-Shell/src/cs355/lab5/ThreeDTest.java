@@ -1,5 +1,6 @@
 package cs355.lab5;
 
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 
@@ -16,30 +17,44 @@ public class ThreeDTest {
     
     private ThreeDState state = ThreeDState.getInstance();
     
+    private double zoom = Math.pow(3,0.5);
+    private double f = 1000;
+    private double n = 1;
+    
 
-	public Point2D test(Point3D p) {
+	public Line2D test(Point3D p1, Point3D p2) {
+		Vector v11 = testOnePoint(p1);
+		Vector v22 = testOnePoint(p2);
+		double[] v1 = v11.getV();
+		double[] v2 = v22.getV();
+		if(v1[2] < -1 || v2[2] < -1){
+			return null;
+		}
+		if(v1[2] > 1 || v2[2] > 1){
+			return null;
+		}
+		if((v1[0] < -1 && v2[0] < -1) ||
+		   (v1[1] < -1 && v2[1] < -1) ||
+		   (v1[0] > 1 && v2[0] > 1) ||
+		   (v1[1] > 1 && v2[1] > 1)){
+			return null;
+		}
+		return new Line2D.Double(map(v11),map(v22));
+	}
+	
+	private Vector testOnePoint(Point3D p){
 		Vector v = new Vector(p);
 		Vector v1 = getWorldToCameraTranslationMatrix().mutiplyByVector(v);
 		Vector v2 = getWorldToCameraRotationMatrix().mutiplyByVector(v1);
 		Vector v3 = getClipMatrix().mutiplyByVector(v2);
 		Vector v4 = v3.normalize();
-		Vector v5 = v4.clip();
-		System.out.print("translate  ");
-		System.out.println(v1.toString());
-		System.out.print("rotate  ");
-		System.out.println(v2.toString());
-		System.out.print("clip  ");
-		System.out.println(v3.toString());
-		System.out.print("normalize  ");
-		System.out.println(v4.toString());
-		if(v5 == null){
-			return null;
-		}
-		System.out.print("test  ");
-		System.out.println(v5.toString());
+		return v4;
+	}
+	
+	private Point2D map(Vector v){
 		double[] result = v.getV();
-		double x = (result[0]*256)+(256);
-		double y = (-result[1]*256)+(256);
+		double x = (result[0]+1)*256;
+		double y = (-result[1]+1)*256;
 		return new Point2D.Double(x,y);
 	}
 	
@@ -54,7 +69,7 @@ public class ThreeDTest {
 	}
 	
 	private Matrix getWorldToCameraRotationMatrix(){
-		double theta = state.getCameraDirection();
+		double theta = Math.toRadians(state.getCameraDirection());
 		double[][] m = new double[][]{
 			{Math.cos(theta),0,Math.sin(theta),0},
 			{0,1,0,0},
@@ -65,13 +80,10 @@ public class ThreeDTest {
 	}
 	
 	private Matrix getClipMatrix(){
-		double zoom = Math.pow(3, 0.5);
-		double f = 1000;
-		double n = 1;
 		double[][] m = new double[][]{
 			{zoom,0,0,0},
 			{0,zoom,0,0},
-			{0,0,(f+n)/(f-n),(-2*n*f)/(f-n)},
+			{0,0,(f+n)/(f-n),-2*n*f/(f-n)},
 			{0,0,1,0}
 		};
 		return new Matrix(m);
@@ -79,7 +91,7 @@ public class ThreeDTest {
 	
 	public class Matrix{
 
-		double[][] m;
+		private double[][] m;
 		
 		public Matrix(double[][] m){
 			this.m = m;
@@ -103,7 +115,7 @@ public class ThreeDTest {
 	
 	public class Vector{
 		
-		double[] v = new double[4];
+		private double[] v = new double[4];
 		
 		public Vector(Point3D p){
 			v[0] = p.x;
@@ -114,15 +126,6 @@ public class ThreeDTest {
 		
 		public Vector(double[] v){
 			this.v = v;
-		}
-		
-		public Vector clip(){
-			if(Math.abs(v[0]) >= 1 || 
-			   Math.abs(v[1]) >= 1 ||
-			   Math.abs(v[2]) >= 1){
-				return null;
-			}
-			return this;
 		}
 		
 		public Vector normalize(){
@@ -137,7 +140,6 @@ public class ThreeDTest {
 		public double[] getV() {
 			return v;
 		}
-
 		@Override
 		public String toString() {
 			return "Vector [v=" + Arrays.toString(v) + "]";

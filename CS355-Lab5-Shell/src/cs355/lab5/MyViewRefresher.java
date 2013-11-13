@@ -2,15 +2,17 @@ package cs355.lab5;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import cs355.HouseModel;
 import cs355.Line3D;
 import cs355.Point3D;
 import cs355.ViewRefresher;
 import cs355.WireFrame;
-import cs355.model.*;
+import cs355.models.*;
 
 public class MyViewRefresher implements ViewRefresher{
 
@@ -47,19 +49,17 @@ public class MyViewRefresher implements ViewRefresher{
 			}
 		}
 		if(threeD.isOn()){
-			System.out.println("draw 3D");
+			g2d.setTransform(tfm.worldToView());
 			g2d.setColor(Color.WHITE);
-			WireFrame model = threeD.getModel();
+			WireFrame model = new HouseModel();
 			Iterator<Line3D> linesItr = model.getLines();
 	        while(linesItr.hasNext()) {
 	        	Line3D line = linesItr.next();
 	        	Point3D start = new cs355.Point3D(line.start.x,line.start.y,line.start.z);
 	        	Point3D end = new cs355.Point3D(line.end.x,line.end.y,line.end.z);
-	    		Point2D a = tdt.test(start);
-	    		Point2D b = tdt.test(end);
-	        	if(a != null && b != null){
-	        		System.out.println("draw line");
-	        		g2d.drawLine((int)a.getX(), (int)a.getY(), (int)b.getX(), (int)b.getY());
+	    		Line2D l = tdt.test(start,end);
+	        	if(l != null){
+	        		g2d.drawLine((int)l.getX1(), (int)l.getY1(), (int)l.getX2(), (int)l.getY2());
 	        	}
 	        }
 		}

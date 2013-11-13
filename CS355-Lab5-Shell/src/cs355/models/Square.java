@@ -1,48 +1,38 @@
-package cs355.model;
+package cs355.models;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class Ellipse extends Shape{
+public class Square extends Shape {
+
+	private double size;
 	
-	private double height;
-	private double width;
-	
-	public Ellipse(Color color) {
+	public Square(Color color) {
 		super(color);
 	}
 	
-	public Ellipse(Point2D start) {
+	public Square(Point2D start) {
 		super();
 		origin = start;
-		height = 0;
-		width = 0;
+		size = 0;
 	}
 
-	public double getHeight() {
-		return height;
+	public double getSize() {
+		return size;
 	}
 
-	public void setHeight(double height) {
-		this.height = height;
-	}
-
-	public double getWidth() {
-		return width;
-	}
-
-	public void setWidth(double width) {
-		this.width = width;
+	public void setSize(double size) {
+		this.size = size;
 	}
 
 	@Override
 	public ArrayList<Point2D> getResizePoints() {
 		ArrayList<Point2D> bPoints = new ArrayList<Point2D>();
 		bPoints.add(new Point2D.Double(0,0)); // 0 upper left
-		bPoints.add(new Point2D.Double(width,0)); // 1 upper right
-		bPoints.add(new Point2D.Double(width,height)); // 2 lower right
-		bPoints.add(new Point2D.Double(0,height)); // 3 lower left
+		bPoints.add(new Point2D.Double(size,0)); // 1 upper right
+		bPoints.add(new Point2D.Double(size,size)); // 2 lower right
+		bPoints.add(new Point2D.Double(0,size)); // 3 lower left
 		return bPoints;
 	}
 
@@ -56,9 +46,13 @@ public class Ellipse extends Shape{
 
 	@Override
 	public boolean contains(Point2D p) {
-		double x = p.getX();
-		double y = p.getY();
-		return (Math.pow((x-(width/2))/(width/2.0), 2) + Math.pow((y-(height/2))/(height/2.0), 2) <= 1);
+		if(p.getY() < 0 ||
+		   p.getX() < 0 ||
+		   p.getY() > size ||
+		   p.getX() > size){
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -68,6 +62,7 @@ public class Ellipse extends Shape{
 
 	@Override
 	public Point2D getCenter() {
-		return new Point2D.Double(width/2,height/2);
+		return new Point2D.Double(size/2,size/2);
 	}
+
 }

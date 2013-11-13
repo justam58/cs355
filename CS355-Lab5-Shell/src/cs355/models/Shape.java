@@ -1,4 +1,4 @@
-package cs355.model;
+package cs355.models;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;

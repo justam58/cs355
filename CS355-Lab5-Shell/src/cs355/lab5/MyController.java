@@ -84,29 +84,30 @@ public class MyController implements CS355Controller{
 		while(iterator.hasNext()){
 			Integer key = iterator.next();
 			char c = Character.toChars(key)[0];
-			switch(key){
-				case 65 :		threeD.setCameraX(threeD.getCameraX()+1);
+			switch(c){
+				case 'A' :		threeD.setCameraX(threeD.getCameraX()+1);
 								break;
-				case 68 :		threeD.setCameraX(threeD.getCameraX()-1);
+				case 'D' :		threeD.setCameraX(threeD.getCameraX()-1);
 								break;
-				case 87 :		threeD.setCameraZ(threeD.getCameraZ()+1);
+				case 'W' :		threeD.setCameraZ(threeD.getCameraZ()-1);
 								break;
-				case 83 :		threeD.setCameraZ(threeD.getCameraZ()-1);
+				case 'S' :		threeD.setCameraZ(threeD.getCameraZ()+1);
 								break;
-				case 81 :		threeD.setCameraDirection(threeD.getCameraDirection()-1);
+				case 'Q' :		threeD.setCameraDirection(threeD.getCameraDirection()+1);
 								break;
-				case 69 :		threeD.setCameraDirection(threeD.getCameraDirection()+1);
+				case 'E' :		threeD.setCameraDirection(threeD.getCameraDirection()-1);
 								break;
-				case 82 :		threeD.setCameraY(threeD.getCameraY()-1);
+				case 'R' :		threeD.setCameraY(threeD.getCameraY()+1);
 								break;
-				case 70 :		threeD.setCameraY(threeD.getCameraY()+1);
+				case 'F' :		threeD.setCameraY(threeD.getCameraY()-1);
 								break;
-				case 72 :		threeD.reset();
+				case 'H' :		threeD.reset();
 								break;		
 				default:		System.out.printf("Invalid key\n");
             					break;
 			}
 			GUIFunctions.refresh();
+//			System.out.printf("%d %d %d\n",(int)threeD.getCameraX(),(int)threeD.getCameraY(),(int)threeD.getCameraZ());
 		}
 	}
 

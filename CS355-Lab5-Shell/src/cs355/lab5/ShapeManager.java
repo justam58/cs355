@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import cs355.GUIFunctions;
-import cs355.model.Shape;
+import cs355.models.Shape;
 
 
 public class ShapeManager {

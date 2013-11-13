@@ -2,7 +2,7 @@ package cs355.lab5;
 
 import java.awt.geom.AffineTransform;
 
-import cs355.model.Shape;
+import cs355.models.Shape;
 
 public class Transformation {
 	

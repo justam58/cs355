@@ -1,8 +1,5 @@
 package cs355.lab5;
 
-import cs355.HouseModel;
-import cs355.WireFrame;
-
 public class ThreeDState {
 	
 	// singleton
@@ -12,14 +9,14 @@ public class ThreeDState {
         return instance;
     }
     
+    //mode
     private boolean on;
-    private WireFrame model = new HouseModel();
     
 	//camera
-	private float cameraX;
-	private float cameraY;
-	private float cameraZ;
-	private float cameraDirection;
+	private double cameraX;
+	private double cameraY;
+	private double cameraZ;
+	private int cameraDirection;
     
     public ThreeDState(){
     	on = true;
@@ -41,39 +38,36 @@ public class ThreeDState {
 		return on;
 	}
 
-	public float getCameraX() {
+	public double getCameraX() {
 		return cameraX;
 	}
 
-	public void setCameraX(float cameraX) {
+	public void setCameraX(double cameraX) {
 		this.cameraX = cameraX;
 	}
 
-	public float getCameraY() {
+	public double getCameraY() {
 		return cameraY;
 	}
 
-	public void setCameraY(float cameraY) {
+	public void setCameraY(double cameraY) {
 		this.cameraY = cameraY;
 	}
 
-	public float getCameraZ() {
+	public double getCameraZ() {
 		return cameraZ;
 	}
 
-	public void setCameraZ(float cameraZ) {
+	public void setCameraZ(double cameraZ) {
 		this.cameraZ = cameraZ;
 	}
 
-	public float getCameraDirection() {
+	public int getCameraDirection() {
 		return cameraDirection;
 	}
 
-	public void setCameraDirection(float cameraDirection) {
+	public void setCameraDirection(int cameraDirection) {
 		this.cameraDirection = cameraDirection;
 	}
 
-	public WireFrame getModel() {
-		return model;
-	}
 }

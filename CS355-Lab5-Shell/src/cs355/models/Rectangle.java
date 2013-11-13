@@ -1,38 +1,48 @@
-package cs355.model;
+package cs355.models;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class Square extends Shape {
-
-	private double size;
+public class Rectangle extends Shape{
 	
-	public Square(Color color) {
+	private double height;
+	private double width;
+	
+	public Rectangle(Color color) {
 		super(color);
 	}
 	
-	public Square(Point2D start) {
+	public Rectangle(Point2D start) {
 		super();
 		origin = start;
-		size = 0;
+		height = 0;
+		width = 0;
 	}
 
-	public double getSize() {
-		return size;
+	public double getHeight() {
+		return height;
 	}
 
-	public void setSize(double size) {
-		this.size = size;
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
 	}
 
 	@Override
 	public ArrayList<Point2D> getResizePoints() {
 		ArrayList<Point2D> bPoints = new ArrayList<Point2D>();
 		bPoints.add(new Point2D.Double(0,0)); // 0 upper left
-		bPoints.add(new Point2D.Double(size,0)); // 1 upper right
-		bPoints.add(new Point2D.Double(size,size)); // 2 lower right
-		bPoints.add(new Point2D.Double(0,size)); // 3 lower left
+		bPoints.add(new Point2D.Double(width,0)); // 1 upper right
+		bPoints.add(new Point2D.Double(width,height)); // 2 lower right
+		bPoints.add(new Point2D.Double(0,height)); // 3 lower left
 		return bPoints;
 	}
 
@@ -48,8 +58,8 @@ public class Square extends Shape {
 	public boolean contains(Point2D p) {
 		if(p.getY() < 0 ||
 		   p.getX() < 0 ||
-		   p.getY() > size ||
-		   p.getX() > size){
+		   p.getY() > height ||
+		   p.getX() > width){
 				return false;
 		}
 		return true;
@@ -62,7 +72,6 @@ public class Square extends Shape {
 
 	@Override
 	public Point2D getCenter() {
-		return new Point2D.Double(size/2,size/2);
+		return new Point2D.Double(width/2,height/2);
 	}
-
 }
