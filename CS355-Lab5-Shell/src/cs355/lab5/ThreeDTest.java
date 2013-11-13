@@ -2,7 +2,6 @@ package cs355.lab5;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.util.Arrays;
 
 import cs355.Point3D;
 
@@ -28,16 +27,17 @@ public class ThreeDTest {
 		Vector v22 = testOnePoint(p2);
 		double[] v1 = v11.getV();
 		double[] v2 = v22.getV();
-		if(v1[2] < -1 || v2[2] < -1){
+		if((v11.getBack() == true) || (v22.getBack() == true)){
 			return null;
 		}
-		if(v1[2] > 1 || v2[2] > 1){
+		if(v1[2] < -1 || v2[2] < -1){
 			return null;
 		}
 		if((v1[0] < -1 && v2[0] < -1) ||
 		   (v1[1] < -1 && v2[1] < -1) ||
 		   (v1[0] > 1 && v2[0] > 1) ||
-		   (v1[1] > 1 && v2[1] > 1)){
+		   (v1[1] > 1 && v2[1] > 1) ||
+		   (v1[2] > 1 && v2[2] > 1)){
 			return null;
 		}
 		return new Line2D.Double(map(v11),map(v22));
@@ -49,6 +49,9 @@ public class ThreeDTest {
 		Vector v2 = getWorldToCameraRotationMatrix().mutiplyByVector(v1);
 		Vector v3 = getClipMatrix().mutiplyByVector(v2);
 		Vector v4 = v3.normalize();
+		if(v2.getV()[2] < 0){
+			v4.setBack(true);
+		}
 		return v4;
 	}
 	
@@ -117,6 +120,7 @@ public class ThreeDTest {
 	public class Vector{
 		
 		private double[] v = new double[4];
+		private boolean back = false;
 		
 		public Vector(Point3D p){
 			v[0] = p.x;
@@ -127,6 +131,14 @@ public class ThreeDTest {
 		
 		public Vector(double[] v){
 			this.v = v;
+		}
+		
+		public void setBack(boolean back){
+			this.back = back;
+		}
+		
+		public boolean getBack(){
+			return back;
 		}
 		
 		public Vector normalize(){
