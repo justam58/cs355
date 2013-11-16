@@ -110,6 +110,7 @@ public class MyController implements CS355Controller{
 				default:		System.out.printf("Invalid key\n");
             					break;
 			}
+			System.out.println("draw");
 			GUIFunctions.refresh();
 //			System.out.println(threeD.getCameraDirection());
 //			System.out.printf("cos %f\n",Math.cos(Math.toRadians(threeD.getCameraDirection())));

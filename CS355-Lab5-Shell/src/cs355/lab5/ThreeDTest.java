@@ -49,6 +49,7 @@ public class ThreeDTest {
 		Vector v2 = getWorldToCameraRotationMatrix().mutiplyByVector(v1);
 		Vector v3 = getClipMatrix().mutiplyByVector(v2);
 		Vector v4 = v3.normalize();
+		System.out.println(v2.getV()[2]);
 		if(v2.getV()[2] < 0){
 			v4.setBack(true);
 		}

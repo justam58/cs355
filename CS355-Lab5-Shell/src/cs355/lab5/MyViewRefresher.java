@@ -48,7 +48,7 @@ public class MyViewRefresher implements ViewRefresher{
                 									break;
 			}
 		}
-		if(threeD.isOn()){
+		if(threeD.isOn()){			
 			g2d.setTransform(tfm.worldToView());
 			g2d.setColor(Color.WHITE);
 			WireFrame model = new HouseModel();
