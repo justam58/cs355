@@ -2,6 +2,8 @@ package cs355.lab6;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MyImage {
 	// singleton
@@ -70,23 +72,98 @@ public class MyImage {
 	}
 
 	public void doUniformBlur() {
-		// TODO Auto-generated method stub
-		
+		MyImage copyImage = new MyImage(this);
+		int[][] copy = copyImage.getRawImage();
+		int[][] k = {{1,1,1},{1,1,1},{1,1,1}};
+    	for (int i = 1; i < height-1; i++){
+    		for (int j = 1; j < width-1; j++){
+    			int ul = copy[i-1][j-1]*k[0][0];
+    			int um = copy[i-1][j]*k[0][1];
+    			int ur = copy[i-1][j+1]*k[0][2];
+    			int ml = copy[i][j-1]*k[1][0];
+    			int mm = copy[i][j]*k[1][1];
+    			int mr = copy[i][j+1]*k[1][2];
+    			int dl = copy[i+1][j-1]*k[2][0];
+    			int dm = copy[i+1][j]*k[2][1];
+    			int dr = copy[i+1][j+1]*k[2][2];
+    			image[i][j]=(ul+um+ur+ml+mm+mr+dl+dm+dr)/9;
+    		}
+    	}
 	}
 
 	public void doMedianBlur() {
-		// TODO Auto-generated method stub
-		
+		MyImage copyImage = new MyImage(this);
+		int[][] copy = copyImage.getRawImage();
+		int[][] k = {{1,1,1},{1,1,1},{1,1,1}};
+    	for (int i = 1; i < height-1; i++){
+    		for (int j = 1; j < width-1; j++){
+    			ArrayList<Integer> ns = new ArrayList<Integer>();
+    			ns.add(copy[i-1][j-1]*k[0][0]);
+    			ns.add(copy[i-1][j]*k[0][1]);
+    			ns.add(copy[i-1][j+1]*k[0][2]);
+    			ns.add(copy[i][j-1]*k[1][0]);
+    			ns.add(copy[i][j]*k[1][1]);
+    			ns.add(copy[i][j+1]*k[1][2]);
+    			ns.add(copy[i+1][j-1]*k[2][0]);
+    			ns.add(copy[i+1][j]*k[2][1]);
+    			ns.add(copy[i+1][j+1]*k[2][2]);
+    			Collections.sort(ns);
+    			image[i][j]=ns.get(4);
+    		}
+    	}
 	}
 
 	public void doSharpen() {
-		// TODO Auto-generated method stub
-		
+		MyImage copyImage = new MyImage(this);
+		int[][] copy = copyImage.getRawImage();
+		int[][] k = {{0,-1/2,0},{-1/2,3,-1/2},{0,-1/2,0}};
+    	for (int i = 1; i < height-1; i++){
+    		for (int j = 1; j < width-1; j++){
+    			int ul = copy[i-1][j-1]*k[0][0];
+    			int um = copy[i-1][j]*k[0][1];
+    			int ur = copy[i-1][j+1]*k[0][2];
+    			int ml = copy[i][j-1]*k[1][0];
+    			int mm = copy[i][j]*k[1][1];
+    			int mr = copy[i][j+1]*k[1][2];
+    			int dl = copy[i+1][j-1]*k[2][0];
+    			int dm = copy[i+1][j]*k[2][1];
+    			int dr = copy[i+1][j+1]*k[2][2];
+    			image[i][j]=ul+um+ur+ml+mm+mr+dl+dm+dr;
+    		}
+    	}
 	}
 
 	public void doEdgeDetection() {
-		// TODO Auto-generated method stub
-		
+		MyImage copyImage = new MyImage(this);
+		int[][] copy = copyImage.getRawImage();
+		int[][] dx = {{-1,0,1},{-2,0,2},{-1,0,1}};
+		int[][] dy = {{-1,-2,-1},{0,0,0},{-1,-2,-1}};
+    	for (int i = 1; i < height-1; i++){
+    		for (int j = 1; j < width-1; j++){
+    			int ulx = copy[i-1][j-1]*dx[0][0];
+    			int umx = copy[i-1][j]*dx[0][1];
+    			int urx = copy[i-1][j+1]*dx[0][2];
+    			int mlx = copy[i][j-1]*dx[1][0];
+    			int mmx = copy[i][j]*dx[1][1];
+    			int mrx = copy[i][j+1]*dx[1][2];
+    			int dlx = copy[i+1][j-1]*dx[2][0];
+    			int dmx = copy[i+1][j]*dx[2][1];
+    			int drx = copy[i+1][j+1]*dx[2][2];
+    			int x = ulx+umx+urx+mlx+mmx+mrx+dlx+dmx+drx;
+    			
+    			int uly = copy[i-1][j-1]*dy[0][0];
+    			int umy = copy[i-1][j]*dy[0][1];
+    			int ury = copy[i-1][j+1]*dy[0][2];
+    			int mly = copy[i][j-1]*dy[1][0];
+    			int mmy = copy[i][j]*dy[1][1];
+    			int mry = copy[i][j+1]*dy[1][2];
+    			int dly = copy[i+1][j-1]*dy[2][0];
+    			int dmy = copy[i+1][j]*dy[2][1];
+    			int dry = copy[i+1][j+1]*dy[2][2];
+    			int y = uly+umy+ury+mly+mmy+mry+dly+dmy+dry;
+    			image[i][j]=(int) Math.sqrt((Math.pow(x, 2)/8)+(Math.pow(y, 2)/8));
+    		}
+    	}
 	}
     
 	public boolean isOn() {
@@ -104,6 +181,10 @@ public class MyImage {
 	public int getWidth() {
 		return width;
 	}
+	
+    public int[][] getRawImage(){
+    	return image;
+    }
 	
 	private int cap(int v){
 		if(v > 255){
