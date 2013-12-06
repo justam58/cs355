@@ -21,10 +21,17 @@ public class MyViewRefresher implements ViewRefresher{
 	private ViewState view = ViewState.getInstance();
 	private ThreeDState threeD = ThreeDState.getInstance();
 	private ThreeDTest tdt = ThreeDTest.getInstance();
+	private MyImage image = MyImage.getInstance();
 	private double stroke;
 	
 	@Override
 	public void refreshView(Graphics2D g2d) {
+		if(image.isOn()){
+			g2d.setTransform(tfm.worldToView());
+			int h = image.getHeight();
+			int w = image.getWidth();
+			g2d.drawImage(image.getImage(), null, 1024-(w/2), 1024-(h/2));
+		}
 		stroke = 4/view.getScale();
 		ArrayList<Shape> shapes = shapeManager.getShapes();
 		int index = shapeManager.getSelectedIndex();

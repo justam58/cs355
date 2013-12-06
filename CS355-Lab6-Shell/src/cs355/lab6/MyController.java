@@ -10,6 +10,7 @@ import cs355.lab6.ShapeManager.Mode;
 public class MyController implements CS355Controller{
 	
 	private ShapeManager shapes = ShapeManager.getInstance();
+	private MyImage image = MyImage.getInstance();
 	private ViewState view = ViewState.getInstance();
 	private ThreeDState threeD = ThreeDState.getInstance();
 
@@ -113,59 +114,55 @@ public class MyController implements CS355Controller{
 			}
 			System.out.println("draw");
 			GUIFunctions.refresh();
-//			System.out.println(threeD.getCameraDirection());
-//			System.out.printf("cos %f\n",Math.cos(Math.toRadians(threeD.getCameraDirection())));
-//			System.out.printf("sin %f\n",Math.sin(Math.toRadians(threeD.getCameraDirection())));
-//			System.out.printf("%d %d %d\n",(int)threeD.getCameraX(),(int)threeD.getCameraY(),(int)threeD.getCameraZ());
 		}
 	}
 
 	@Override
 	public void doEdgeDetection() {
-		// TODO Auto-generated method stub
-		
+		image.doEdgeDetection();
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doSharpen() {
-		// TODO Auto-generated method stub
-		
+		image.doSharpen();
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doMedianBlur() {
-		// TODO Auto-generated method stub
-		
+		image.doMedianBlur();
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doUniformBlur() {
-		// TODO Auto-generated method stub
-		
+		image.doUniformBlur();
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doChangeContrast(int contrastAmountNum) {
-		// TODO Auto-generated method stub
-		
+		image.doChangeContrast(contrastAmountNum);
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doChangeBrightness(int brightnessAmountNum) {
-		// TODO Auto-generated method stub
-		
+		image.doChangeBrightness(brightnessAmountNum);
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void doLoadImage(BufferedImage openImage) {
-		// TODO Auto-generated method stub
-		
+		image.load(openImage);
+		GUIFunctions.refresh();
 	}
 
 	@Override
 	public void toggleBackgroundDisplay() {
-		// TODO Auto-generated method stub
-		
+		image.toggle();
+		GUIFunctions.refresh();
 	}
 
 }
